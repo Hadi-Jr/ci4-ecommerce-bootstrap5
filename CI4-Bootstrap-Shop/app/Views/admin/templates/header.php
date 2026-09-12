@@ -1,0 +1,106 @@
+<div class="wrapper">
+    <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar">
+            <a class="sidebar-brand mt-1" href="<?= base_url('/admin-home-page') ?>">
+                <img style="width: 30px" src="<?= base_url('admin-assets/src/img/icons/icon-48x48.png') ?>">
+                <span class="align-middle small ms-2">Inventory Management</span>
+            </a>
+
+            <ul class="sidebar-nav">
+
+                <li class="sidebar-header">
+                    Инвентаризация и операции
+                </li>
+
+                <!-- Dashboard -->
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="<?= base_url('/') ?>">
+                        <i class="align-middle" data-feather="sliders"></i>
+                        <span class="align-middle">Табло</span>
+                    </a>
+                </li>
+
+                <!-- Inventory -->
+                <li class="sidebar-item parent">
+                    <a data-bs-target="#inventory" data-bs-toggle="collapse" class="sidebar-link collapsed" href="#">
+                        <i class="align-middle" data-feather="package"></i>
+                        <span class="align-middle">Инвентаризация</span>
+                    </a>
+
+                    <ul id="inventory" class="sidebar-dropdown list-unstyled collapse ms-3">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/items') ?>">
+                                <i class="align-middle" data-feather="minus"></i>
+                                <span>Всички артикули</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/items') ?>">
+                                <i class="align-middle" data-feather="minus"></i>
+                                <span>Ниска наличност</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/items') ?>">
+                                <i class="align-middle" data-feather="minus"></i>
+                                <span>Изтичащи скоро</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/add-item') ?>">
+                                <i class="align-middle" data-feather="minus"></i>
+                                <span>Добавяне</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/add-item') ?>">
+                                <i class="align-middle" data-feather="minus"></i>
+                                <span>Отпускане</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/add-item') ?>">
+                                <i class="align-middle" data-feather="minus"></i>
+                                <span>Зареждане</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+            <a class="sidebar-toggle js-sidebar-toggle">
+                <i class="hamburger align-self-center"></i>
+            </a>
+
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav navbar-align">
+                    <li class="nav-item dropdown">
+                        <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                            <i class="align-middle" data-feather="settings"></i>
+                        </a>
+
+                        <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                            <img src="<?= base_url('admin-assets/src/img/avatars/main.png') ?>" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+                            <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+                            <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="<?= base_url('/logout') ?>">Log out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
