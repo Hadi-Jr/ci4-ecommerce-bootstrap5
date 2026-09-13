@@ -41,13 +41,13 @@ $routes->add('/add-favorite/(:any)', 'FavoritesController::add_favorite/$1', ['f
 $routes->add('/remove-favorite', 'FavoritesController::remove_favorite', ['filters' => 'auth']);
 
 /************************************* ADMIN ROUTES *************************************/
-//TODO add filters by role (has to be logged in and has admin role to access these routes)
-$routes->add('/add-product', 'Admin\AdminProductController::add_product');
-$routes->add('/get-attribute-values/(:any)', 'Admin\AdminProductController::get_attribute_values/$1');
-$routes->add('/products-list', 'Admin\AdminProductController::products_list');
-$routes->add('/change-product-status', 'Admin\AdminProductController::change_product_status');
-$routes->add('/edit-product-view/(:any)', 'Admin\AdminProductController::edit_product_view/$1');
-$routes->add('/edit-product', 'Admin\AdminProductController::edit_product');
-$routes->add('/edit-specs', 'Admin\AdminProductController::edit_specs');
-$routes->add('/edit-attributes', 'Admin\AdminProductController::edit_attributes');
-$routes->add('/edit-combinations', 'Admin\AdminProductController::edit_combinations');
+$routes->add('/dashboard', 'Admin\AdminProductController::add_product', ['filter' => 'admin']);
+$routes->add('/add-product', 'Admin\AdminProductController::add_product', ['filter' => 'admin']);
+$routes->add('/get-attribute-values/(:any)', 'Admin\AdminProductController::get_attribute_values/$1', ['filter' => 'admin']);
+$routes->add('/products-list', 'Admin\AdminProductController::products_list', ['filter' => 'admin']);
+$routes->add('/change-product-status', 'Admin\AdminProductController::change_product_status', ['filter' => 'admin']);
+$routes->add('/edit-product-view/(:any)', 'Admin\AdminProductController::edit_product_view/$1', ['filter' => 'admin']);
+$routes->add('/edit-product', 'Admin\AdminProductController::edit_product', ['filter' => 'admin']);
+$routes->add('/edit-specs', 'Admin\AdminProductController::edit_specs', ['filter' => 'admin']);
+$routes->add('/edit-attributes', 'Admin\AdminProductController::edit_attributes', ['filter' => 'admin']);
+$routes->add('/edit-combinations', 'Admin\AdminProductController::edit_combinations', ['filter' => 'admin']);

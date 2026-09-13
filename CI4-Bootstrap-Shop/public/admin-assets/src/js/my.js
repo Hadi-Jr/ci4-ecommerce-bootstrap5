@@ -36,7 +36,7 @@ $(document).on('click', '.remove-comb-name', function () {
 $(document).on('click', '.add-comb-value', function () {
     $(this).siblings('.comb-values').append($('#combValueTemplate .combValueContainer').clone(true));
     calculateCombinations();
-})
+});
 
 $(document).on('click', '.removeCombValue', function () {
     const combCard = $(this).closest('.comb-card');
@@ -73,31 +73,63 @@ $('.add-attribute').on('click', function () {
         $('#attributeTemplate .attr-row').clone(true)
     );
 });
-
 function calculateCombinations() {
     $('.combNameContainer .comb-card').each(function (combNameIndex) {
+        const comb_name_id = $(this).data('combn-id');
+
+        let comb_name_key = combNameIndex;
+        if (comb_name_id !== undefined && comb_name_id !== '') {
+            comb_name_key = comb_name_id;
+        }
+
         $(this).find('.comb-name').text(`Comb Name ${combNameIndex + 1}`);
 
-        $(this).find('.comb-title-value').attr('name', `combinations[${combNameIndex}][title]`);
+        $(this).find('.comb-title-value').attr('name', `combinations[${comb_name_key}][title]`);
 
         $(this).find('.combValueContainer').each(function (combValueIndex) {
+            const comb_value_id = $(this).data('combv-id');
+
+            let comb_value_key = combValueIndex;
+            if (comb_value_id !== undefined && comb_value_id !== '') {
+                comb_value_key = comb_value_id;
+            }
+
             $(this).find('.comb-value').text(`Comb Value ${combValueIndex + 1}`);
 
-            $(this).find('.comb-image')
-                .attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][comb-image]`);
-            $(this).find('.comb-value-title')
-                .attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][title]`);
-
-            $(this).find('.sku').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][sku]`);
-
-            $(this).find('.price').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][price]`);
-
-            $(this).find('.promo').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][promo]`);
-
-            $(this).find('.qty').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][qty]`);
+            $(this).find('.comb-image').attr('name', `combinations[${comb_name_key}][values][${comb_value_key}][comb-image]`);
+            $(this).find('.comb-value-title').attr('name', `combinations[${comb_name_key}][values][${comb_value_key}][title]`);
+            $(this).find('.sku').attr('name', `combinations[${comb_name_key}][values][${comb_value_key}][sku]`);
+            $(this).find('.price').attr('name', `combinations[${comb_name_key}][values][${comb_value_key}][price]`);
+            $(this).find('.promo').attr('name', `combinations[${comb_name_key}][values][${comb_value_key}][promo]`);
+            $(this).find('.qty').attr('name', `combinations[${comb_name_key}][values][${comb_value_key}][qty]`);
         });
     });
 }
+
+// function calculateCombinations() {
+//     $('.combNameContainer .comb-card').each(function (combNameIndex) {
+//         $(this).find('.comb-name').text(`Comb Name ${combNameIndex + 1}`);
+//
+//         $(this).find('.comb-title-value').attr('name', `combinations[${combNameIndex}][title]`);
+//
+//         $(this).find('.combValueContainer').each(function (combValueIndex) {
+//             $(this).find('.comb-value').text(`Comb Value ${combValueIndex + 1}`);
+//
+//             $(this).find('.comb-image')
+//                 .attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][comb-image]`);
+//             $(this).find('.comb-value-title')
+//                 .attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][title]`);
+//
+//             $(this).find('.sku').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][sku]`);
+//
+//             $(this).find('.price').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][price]`);
+//
+//             $(this).find('.promo').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][promo]`);
+//
+//             $(this).find('.qty').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][qty]`);
+//         });
+//     });
+// }
 
 $(document).on('click', '.remove-attribute', function () {
     $(this).closest('.attr-row').remove();

@@ -78,15 +78,16 @@
                     toast: true,
                     position: "bottom-left",
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 1000,
                     timerProgressBar: true,
                     background: "#fff",
                     color: "#333",
                 });
 
+                let redirect = response.redirect;
                 setTimeout(function () {
-                    window.location.href = '<?= base_url('/home') ?>'
-                }, 2000);
+                    window.location.href = redirect
+                }, 1000);
             } else if (response.status === 'error') {
                 $('.is-invalid').removeClass('is-invalid');
 

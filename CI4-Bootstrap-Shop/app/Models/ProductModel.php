@@ -102,7 +102,8 @@ class ProductModel
                     pcv.id as comb_value_id')
             ->join('product_combination_value pcv', 'pcn.id = pcv.comb_name_id')
             ->where('product_id', $product_id)
-            ->where('is_active', 1)
+            ->where('pcv.is_active', 1)
+            ->where('pcn.is_active', 1)
             ->get()
             ->getResult();
 

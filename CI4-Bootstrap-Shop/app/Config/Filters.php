@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Filters\AdminAuthFilter;
 use App\Filters\AlreadyLoggedInFilter;
 use App\Filters\NotLoggedInFilter;
 use App\Filters\RequireAuthFilter;
@@ -40,6 +41,7 @@ class Filters extends BaseFilters
         'performance'   => PerformanceMetrics::class,
         'auth'          => RequireAuthFilter::class,
         'guest'         => RequireGuestFilter::class,
+        'admin'         => AdminAuthFilter::class
     ];
 
     /**

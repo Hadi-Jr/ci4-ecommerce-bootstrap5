@@ -67,9 +67,9 @@
                         </button>
                     </li>
 
-
                     <li class="nav-item d-none d-lg-block ms-lg-2">
-                        <a class="nav-link active text-danger" aria-current="page" href="<?= base_url('/promotions') ?>">
+                        <a class="nav-link active text-danger" aria-current="page"
+                           href="<?= base_url('/promotions') ?>">
                             <i class="fa-solid fa-tag"></i>
                             Promotions
                         </a>
@@ -78,7 +78,14 @@
                     <li class="d-lg-none p-0">
                         <ul class="list-unstyled list-group mt-3">
                             <li class="border-0 list-group-item list-item-clickable">
-                                <a class="d-flex align-items-center gap-2 mt-2" href="<?= base_url('/my-orders') ?>">
+                                <a class="d-flex align-items-center gap-2 mt-2" href="<?= base_url('/favorites') ?>">
+                                    <i class="fa-solid fa-bookmark" style="color: rgb(28, 208, 199);"></i>
+                                    My Favorites
+                                </a>
+                            </li>
+
+                            <li class="border-0 list-group-item list-item-clickable">
+                                <a class="d-flex align-items-center gap-2" href="<?= base_url('/my-orders') ?>">
                                     <i class="fa-solid fa-box" style="color: rgb(28, 208, 199);"></i>
                                     Orders
                                 </a>
@@ -116,6 +123,12 @@
             </div>
 
             <div class="d-none d-lg-flex align-items-center gap-2 me-lg-5">
+
+                <a href="<?= base_url('/favorites') ?>" class="btn btn-outline-secondary rounded p-2 header-icons"
+                   aria-label="Orders" title="My Favorites">
+                    <i class="fa-solid fa-bookmark"></i>
+                </a>
+
                 <a href="<?= base_url('/my-orders') ?>" class="btn btn-outline-secondary rounded p-2 header-icons" aria-label="Orders" title="My Orders">
                     <i class="fa-solid fa-box"></i>
                 </a>

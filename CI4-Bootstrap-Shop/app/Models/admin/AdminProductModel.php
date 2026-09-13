@@ -449,6 +449,105 @@ class AdminProductModel
         return $this->db->transStatus();
     }
 
+    public function update_combinations($data)
+    {
+        $this->db->transStart();
+
+        $product_id = $data['product_id'];
+        $removed_comb_name_ids = $data['removed_comb_name_ids'] ?? [];
+        $removed_comb_value_ids = $data['removed_comb_value_ids'] ?? [];
+
+        if (!empty($removed_comb_value_ids)) {
+            $this->disable_comb_values($removed_comb_value_ids);
+        }
+
+        if (!empty($removed_comb_name_ids)) {
+            $this->disable_comb_names($removed_comb_name_ids);
+        }
+
+        $new_combinations = $data['combinations'] ?? [];
+        $old_combinations = $data['old_combinations'] ?? [];
+
+        foreach ($new_combinations as $comb_name_id => $combination) {
+            if (isset($old_combinations[$comb_name_id])) {
+
+                $this->update_comb_name($comb_name_id, $combination['title']);
+
+                $old_values = $old_combinations[$comb_name_id]['values'] ?? [];
+
+                foreach ($combination['values'] as $comb_value_id => $value) {
+
+                    $comb_value_data = [
+                        'comb_name_id' => $comb_name_id,
+                        'title'        => $value['title'],
+                        'comb_sku'     => $value['sku'],
+                        'comb_price'   => $value['price'],
+                        'comb_promo'   => $value['promo'] ?? 0,
+                        'comb_qty'     => $value['qty'],
+                    ];
+
+                    if (isset($old_values[$comb_value_id])) {
+                        $this->update_comb_value($comb_value_id, $comb_value_data);
+                    } else {
+                        $this->db->table('product_combination_value')->insert($comb_value_data);
+                    }
+                }
+            } else {
+                $new_comb_name_id =
+                    $this->add_new_comb_name($combination['title'], $product_id, 'without_images');
+
+                $new_comb_values = [];
+                foreach ($combination['values'] as $value) {
+                    $new_comb_values[] = [
+                        'comb_name_id' => $new_comb_name_id,
+                        'title'        => $value['title'],
+                        'comb_sku'     => $value['sku'],
+                        'comb_price'   => $value['price'],
+                        'comb_promo'   => $value['promo'] ?? 0,
+                        'comb_qty'     => $value['qty'],
+                        'image_url'    => '' // temporary
+                    ];
+                }
+
+                $this->add_comb_values($new_comb_values);
+            }
+        }
+
+        $this->db->transComplete();
+        return $this->db->transStatus();
+    }
+
+    public function add_comb_values($new_comb_values)
+    {
+        $this->db->table('product_combination_value')->insertBatch($new_comb_values);
+    }
+
+    public function add_new_comb_name($comb_name_title, $product_id, $comb_type)
+    {
+        $this->db->table('product_combination_name')->insert([
+            'title'      => $comb_name_title,
+            'product_id' => $product_id,
+            'comb_type'  => $comb_type // temporary
+        ]);
+        return $this->db->insertID();
+    }
+
+    public function update_comb_name($comb_name_id, $comb_name_title)
+    {
+        $this->db->table('product_combination_name')
+            ->where('id', $comb_name_id)
+            ->update([
+                'title' => $comb_name_title,
+            ]);
+    }
+
+    public function update_comb_value($comb_value_id, $comb_value_data)
+    {
+        $this->db->table('product_combination_value')
+            ->where('id', $comb_value_id)
+            ->update($comb_value_data);
+    }
+
     public function remove_features($feature_ids)
     {
         $this->db->table('features')
@@ -531,27 +630,63 @@ class AdminProductModel
                             pcv.comb_qty')
             ->join('product_combination_value pcv', 'pcv.comb_name_id = pcn.id')
             ->where('pcn.product_id', $product_id)
+            ->where('pcn.is_active', 1)
+            ->where('pcv.is_active', 1)
             ->get()
             ->getResult();
 
-//        $c = [
-//            'comb_name_id' => [
-//                'comb_name_title' => '',
-//                'comb_name_id' => '',
+        if (!$combinations) {
+            return [];
+        }
+
+        //        $combinations_map = [
+//            9 => [
+//                'comb_name_title' => 'Обем',
 //                'comb_values' => [
-//                    1 => [
-//                        'comb_value_title' => '',
-//                        'comb_sku' => ''
-//                    ]
-//                ]
+//                    0 => [
+//                         'comb_value_id' => ''
+//                    ],
+//                ],
 //            ],
 //        ];
         $combinations_map = [];
         foreach ($combinations as $combination) {
-            $combinations_map[$combination->comb_name_id] = [
-                'comb_name_title' => $combination->comb_name_title,
-//                'comb_value_id' => $
+            $combinations_map[$combination->comb_name_id]['comb_name_title'] = $combination->comb_name_title;
+            $combinations_map[$combination->comb_name_id]['comb_values'][] = [
+                'comb_value_id' => $combination->comb_value_id,
+                'comb_value_title' => $combination->comb_value_title,
+                'comb_sku' => $combination->comb_sku,
+                'comb_price' => $combination->comb_price,
+                'comb_promo' => $combination->comb_promo,
+                'comb_qty' => $combination->comb_qty
             ];
         }
+
+        return $combinations_map;
     }
+
+    private function disable_comb_names($removed_comb_name_ids)
+    {
+        $this->db->table('product_combination_name')
+            ->whereIn('id', $removed_comb_name_ids)
+            ->update([
+                'is_active' => 0
+            ]);
+
+        $this->db->table('product_combination_value')
+            ->whereIn('comb_name_id', $removed_comb_name_ids)
+            ->update([
+                'is_active' => 0
+            ]);
+    }
+
+    private function disable_comb_values($removed_comb_value_ids)
+    {
+        $this->db->table('product_combination_value')
+            ->whereIn('id', $removed_comb_value_ids)
+            ->update([
+                'is_active' => 0
+            ]);
+    }
+
 }

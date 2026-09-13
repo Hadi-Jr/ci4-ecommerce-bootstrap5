@@ -340,7 +340,7 @@
                             <input type="number" class="form-control mb-2 price" placeholder="Price"
                                    required>
 
-                            <input type="text" class="form-control mb-2" placeholder="Promo"
+                            <input type="text" class="form-control mb-2 promo" placeholder="Promo"
                                    value="0.0">
 
                             <input type="number" class="form-control mb-2 qty" placeholder="Quantity"
@@ -543,14 +543,6 @@
     $(document).ready(function () {
         calculateCombinations();
     });
-
-    function checkForEmptyVariations() {
-        const combNameContainer = $('.combNameContainer');
-
-        if (combNameContainer.find('.comb-card').length === 0) {
-            combNameContainer.html('<p> No Variations </p>');
-        }
-    }
 
     $(document).on('change', '.attribute-name', function () {
         const selected_value = $(this).val();

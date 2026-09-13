@@ -9,14 +9,21 @@
             <ul class="sidebar-nav">
 
                 <li class="sidebar-header">
-                    Инвентаризация и операции
+                    Inventory and operations
                 </li>
 
                 <!-- Dashboard -->
                 <li class="sidebar-item active">
-                    <a class="sidebar-link" href="<?= base_url('/') ?>">
+                    <a class="sidebar-link" href="<?= base_url('/dashboard') ?>">
                         <i class="align-middle" data-feather="sliders"></i>
-                        <span class="align-middle">Табло</span>
+                        <span class="align-middle">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?= base_url('/categories') ?>">
+                        <i class="align-middle" data-feather="grid"></i>
+                        <span class="align-middle">Categories</span>
                     </a>
                 </li>
 
@@ -24,44 +31,38 @@
                 <li class="sidebar-item parent">
                     <a data-bs-target="#inventory" data-bs-toggle="collapse" class="sidebar-link collapsed" href="#">
                         <i class="align-middle" data-feather="package"></i>
-                        <span class="align-middle">Инвентаризация</span>
+                        <span class="align-middle">Products</span>
                     </a>
 
                     <ul id="inventory" class="sidebar-dropdown list-unstyled collapse ms-3">
                         <li class="sidebar-item">
-                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/items') ?>">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/products-list') ?>">
                                 <i class="align-middle" data-feather="minus"></i>
-                                <span>Всички артикули</span>
+                                <span>Products List</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/items') ?>">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/') ?>">
                                 <i class="align-middle" data-feather="minus"></i>
-                                <span>Ниска наличност</span>
+                                <span>Edit Product</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/items') ?>">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/edit-specs') ?>">
                                 <i class="align-middle" data-feather="minus"></i>
-                                <span>Изтичащи скоро</span>
+                                <span>Edit Features</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/add-item') ?>">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/edit-attributes') ?>">
                                 <i class="align-middle" data-feather="minus"></i>
-                                <span>Добавяне</span>
+                                <span>Edit Attributes</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/add-item') ?>">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/edit-combinations') ?>">
                                 <i class="align-middle" data-feather="minus"></i>
-                                <span>Отпускане</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/add-item') ?>">
-                                <i class="align-middle" data-feather="minus"></i>
-                                <span>Зареждане</span>
+                                <span>Edit Combinations</span>
                             </a>
                         </li>
                     </ul>

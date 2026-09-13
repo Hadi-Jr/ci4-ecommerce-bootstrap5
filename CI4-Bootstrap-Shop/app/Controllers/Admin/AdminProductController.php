@@ -20,7 +20,77 @@ class AdminProductController extends BaseController
     public function edit_combinations()
     {
         if ($this->request->getMethod() === 'POST') {
+            $data = $this->request->getPost();
+            $rules = [
+                'product_id' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Please choose a product'
+                    ]
+                ],
+                'combinations' => [
+                    'rules' => 'permit_empty',
+                    'errors' => []
+                ],
+                'combinations.*.title' => [
+                    'rules' => 'required_with[combinations]',
+                    'errors' => [
+                        'required_with' => lang('Errors.combination_data_required')
+                    ]
+                ],
+                'combinations.*.values.*.title' => [
+                    'rules' => 'required_with[combinations]',
+                    'errors' => [
+                        'required_with' => lang('Errors.combination_data_required')
+                    ]
+                ],
+                'combinations.*.values.*.sku' => [
+                    'rules' => 'required_with[combinations]',
+                    'errors' => [
+                        'required_with' => lang('Errors.combination_data_required')
+                    ]
+                ],
+                'combinations.*.values.*.price' => [
+                    'rules' => 'required_with[combinations]',
+                    'errors' => [
+                        'required_with' => lang('Errors.combination_data_required')
+                    ]
+                ],
+                'combinations.*.values.*.promo' => [
+                    'rules' => 'required_with[combinations]',
+                    'errors' => [
+                        'required_with' => lang('Errors.combination_data_required')
+                    ]
+                ],
+                'combinations.*.values.*.qty' => [
+                    'rules' => 'required_with[combinations]',
+                    'errors' => [
+                        'required_with' => lang('Errors.combination_data_required')
+                    ]
+                ],
+            ];
 
+            if (!$this->validate($rules)) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'errors' => $this->validator->getErrors()
+                ]);
+            }
+
+            $response = $this->admin_product_model->update_combinations($data);
+            if (!$response) {
+                return $this->response
+                    ->setStatusCode(500)
+                    ->setJSON([
+                        'status' => 'error',
+                        'message' => 'Something went wrong, please try again later'
+                    ]);
+            }
+
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Product has been updated successfully'
+            ]);
         }
 
         $product_id = $this->request->getGet('product_id');
@@ -479,10 +549,10 @@ class AdminProductController extends BaseController
             $this->data['products'] = $products;
         }
 
-        return view('templates/meta', $this->data)
-            . view('templates/header', $this->data)
+        return view('admin/templates/meta', $this->data)
+            . view('admin/templates/header', $this->data)
             . view('admin/products/products_list', $this->data)
-            . view('templates/footer', $this->data);
+            . view('admin/templates/footer', $this->data);
     }
 
     public function change_product_status()

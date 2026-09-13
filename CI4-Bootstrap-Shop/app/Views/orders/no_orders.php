@@ -1,25 +1,16 @@
-<div class="orders-page mt-5">
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5 mb-5">
-                <div class="text-center">
-                    <div>
-                        <i class="bi bi-box-seam" style="font-size: 15rem; color: #dee2e6;"></i>
-                    </div>
+<div class="text-center py-5 mt-5">
+    <i class="fa-solid fa-box text-secondary" style="font-size: 5rem;"></i>
+    <h3 class="mt-3 mb-1">No orders yet</h3>
+    <p class="text-muted small mb-0">Items you order will show up here</p>
 
-                    <h4>No Orders Yet</h4>
-
-                    <p class="text-muted mb-4">
-                        You haven't placed any orders yet.
-                        <br>Start shopping to see your orders here!
-                    </p>
-
-                    <div>
-                        <a href="<?= base_url('/') ?>" class="btn fw-bold green-btn">Explore our products</a>
-                        <p class="mt-2 fw-bold">OR</p>
-                        <input type="text" class="form-control" placeholder="Enter your tracking number here" id="track">
-                        <p class="error-message mt-3"></p>
-                    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6 col-lg-5">
+            <div class="text-center">
+                <div>
+                    <a href="<?= base_url('/') ?>" class="btn fw-bold green-btn">Explore our products</a>
+                    <p class="mt-2 fw-bold">OR</p>
+                    <input type="text" class="form-control" placeholder="Enter your tracking number here" id="track">
+                    <p class="error-message mt-3"></p>
                 </div>
             </div>
         </div>

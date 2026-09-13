@@ -157,9 +157,12 @@ class UserController extends BaseController
                 $this->cart_model->transfer_cart_items($session_id, $user->id, $cart);
             }
 
+            $redirect = $user->role === 'admin' ? base_url('/dashboard') : base_url('/home');
+
             return $this->response->setJSON([
                 'status' => 'success',
-                'message' => lang('App.successful_login')
+                'message' => lang('App.successful_login'),
+                'redirect' => $redirect
             ]);
         }
 

@@ -23,16 +23,6 @@ document.querySelector("#main-product-rater") &&
     },
   }));
 
-document.querySelector("#basic-rater5") &&
-  (basicRating = raterJs({
-    starSize: 22,
-    rating: 1,
-    element: document.querySelector("#basic-rater5"),
-    rateCallback: function (e, t) {
-      (this.setRating(e), t());
-    },
-  }));
-
 document.querySelectorAll(".review-rater").forEach(function (element) {
   raterJs({
     starSize: 22,
