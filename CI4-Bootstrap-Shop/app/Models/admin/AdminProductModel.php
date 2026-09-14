@@ -121,12 +121,7 @@ class AdminProductModel
 
     public function save_combinations($combinations, $product_id, $files)
     {
-        $processedCombNames = [];
         foreach ($combinations as $comb_name_index => $combination) {
-
-            if (in_array($combination['title'], $processedCombNames)) {
-                continue;
-            }
 
             $comb_name_data = [
                 'title' => $combination['title'],
@@ -141,14 +136,7 @@ class AdminProductModel
             $comb_name_id = $this->db->insertId();
             $comb_values = $combination['values'];
 
-            $processedCombValues = [];
-            $processedCombCodes = [];
             foreach ($comb_values as $comb_value_index => $comb_value) {
-
-                if (in_array($comb_value['title'], $processedCombValues)
-                    || in_array($comb_value['sku'], $processedCombCodes)) {
-                    continue;
-                }
 
                 $filename = '';
                 $comb_image = $files['combinations'][$comb_name_index]['values'][$comb_value_index]['comb-image'];
@@ -449,7 +437,7 @@ class AdminProductModel
         return $this->db->transStatus();
     }
 
-    public function update_combinations($data)
+    public function update_combinations($data, $files)
     {
         $this->db->transStart();
 
@@ -469,47 +457,104 @@ class AdminProductModel
         $old_combinations = $data['old_combinations'] ?? [];
 
         foreach ($new_combinations as $comb_name_id => $combination) {
+            log_message('debug', 'Updating comb_name_id=' . $comb_name_id . ' with title=' . $combination['title']);
+
             if (isset($old_combinations[$comb_name_id])) {
 
-                $this->update_comb_name($comb_name_id, $combination['title']);
+                $this->db->table('product_combination_name')
+                    ->where('id', $comb_name_id)
+                    ->update([
+                        'title' => $combination['title'],
+                    ]);
+
+                log_message('debug', 'Updating comb_name_id=' . $comb_name_id . ' with title=' . $combination['title']);
 
                 $old_values = $old_combinations[$comb_name_id]['values'] ?? [];
 
-                foreach ($combination['values'] as $comb_value_id => $value) {
-
-                    $comb_value_data = [
-                        'comb_name_id' => $comb_name_id,
-                        'title'        => $value['title'],
-                        'comb_sku'     => $value['sku'],
-                        'comb_price'   => $value['price'],
-                        'comb_promo'   => $value['promo'] ?? 0,
-                        'comb_qty'     => $value['qty'],
-                    ];
+                foreach ($combination['values'] as $comb_value_id => $comb_value) {
 
                     if (isset($old_values[$comb_value_id])) {
+                        $comb_value_data = [
+                            'comb_name_id' => $comb_name_id,
+                            'title'        => $comb_value['title'],
+                            'comb_sku'     => $comb_value['sku'],
+                            'comb_price'   => $comb_value['price'],
+                            'comb_promo'   => $comb_value['promo'] ?? 0,
+                            'comb_qty'     => $comb_value['qty'],
+                        ];
+
                         $this->update_comb_value($comb_value_id, $comb_value_data);
                     } else {
+                        $filename = '';
+                        $comb_image = $files['combinations'][$comb_name_id]['values'][$comb_value_id]['comb-image'];
+                        if ($comb_image && $comb_image->getError() !== UPLOAD_ERR_NO_FILE) {
+                            $folder_path = FCPATH . '/assets/images/products/' . $product_id . '/comb-images/';
+                            if (!is_dir($folder_path)) {
+                                mkdir($folder_path, 0777, true);
+                            }
+                            if ($comb_image->isValid() && !$comb_image->hasMoved()) {
+
+                                $filename = 'comb-image-' . $comb_value_id + 1 . '.' . $comb_image->getExtension();
+
+                                if (!$comb_image->move($folder_path, $filename)) {
+                                    log_message('error', 'Error saving combination image');
+                                }
+                            } else {
+                                log_message('error', 'Error saving combination image, not valid or has moved');
+                                $this->delete_directory($folder_path);
+                            }
+                        }
+
+                        $comb_value_data = [
+                            'title' => $comb_value['title'],
+                            'comb_name_id' => $comb_name_id,
+                            'comb_sku' => $comb_value['sku'],
+                            'comb_price' => $comb_value['price'],
+                            'comb_promo' => $comb_value['promo'],
+                            'comb_qty' => $comb_value['qty'],
+                            'image_url' => ('/assets/images/products/' . $product_id . '/comb-images/' . $filename) ?? ''
+                        ];
+
                         $this->db->table('product_combination_value')->insert($comb_value_data);
                     }
                 }
             } else {
                 $new_comb_name_id =
-                    $this->add_new_comb_name($combination['title'], $product_id, 'without_images');
+                    $this->add_new_comb_name($combination['title'], $product_id);
 
-                $new_comb_values = [];
-                foreach ($combination['values'] as $value) {
-                    $new_comb_values[] = [
+                foreach ($combination['values'] as $comb_value_id => $comb_value) {
+                    $filename = '';
+                    $comb_image = $files['combinations'][$comb_name_id]['values'][$comb_value_id]['comb-image'];
+                    if ($comb_image && $comb_image->getError() !== UPLOAD_ERR_NO_FILE) {
+                        $folder_path = FCPATH . '/assets/images/products/' . $product_id . '/comb-images/';
+                        if (!is_dir($folder_path)) {
+                            mkdir($folder_path, 0777, true);
+                        }
+                        if ($comb_image->isValid() && !$comb_image->hasMoved()) {
+
+                            $filename = 'comb-image-' . $comb_value_id + 1 . '.' . $comb_image->getExtension();
+
+                            if (!$comb_image->move($folder_path, $filename)) {
+                                log_message('error', 'Error saving combination image');
+                            }
+                        } else {
+                            log_message('error', 'Error saving combination image, not valid or has moved');
+                            $this->delete_directory($folder_path);
+                        }
+                    }
+
+                    $comb_value_data = [
+                        'title' => $comb_value['title'],
                         'comb_name_id' => $new_comb_name_id,
-                        'title'        => $value['title'],
-                        'comb_sku'     => $value['sku'],
-                        'comb_price'   => $value['price'],
-                        'comb_promo'   => $value['promo'] ?? 0,
-                        'comb_qty'     => $value['qty'],
-                        'image_url'    => '' // temporary
+                        'comb_sku' => $comb_value['sku'],
+                        'comb_price' => $comb_value['price'],
+                        'comb_promo' => $comb_value['promo'],
+                        'comb_qty' => $comb_value['qty'],
+                        'image_url' => ('/assets/images/products/' . $product_id . '/comb-images/' . $filename) ?? ''
                     ];
-                }
 
-                $this->add_comb_values($new_comb_values);
+                    $this->db->table('product_combination_value')->insert($comb_value_data);
+                }
             }
         }
 
@@ -517,28 +562,13 @@ class AdminProductModel
         return $this->db->transStatus();
     }
 
-    public function add_comb_values($new_comb_values)
-    {
-        $this->db->table('product_combination_value')->insertBatch($new_comb_values);
-    }
-
-    public function add_new_comb_name($comb_name_title, $product_id, $comb_type)
+    public function add_new_comb_name($comb_name_title, $product_id)
     {
         $this->db->table('product_combination_name')->insert([
             'title'      => $comb_name_title,
-            'product_id' => $product_id,
-            'comb_type'  => $comb_type // temporary
+            'product_id' => $product_id
         ]);
         return $this->db->insertID();
-    }
-
-    public function update_comb_name($comb_name_id, $comb_name_title)
-    {
-        $this->db->table('product_combination_name')
-            ->where('id', $comb_name_id)
-            ->update([
-                'title' => $comb_name_title,
-            ]);
     }
 
     public function update_comb_value($comb_value_id, $comb_value_data)
@@ -627,7 +657,8 @@ class AdminProductModel
                             pcv.comb_sku,
                             pcv.comb_price,
                             pcv.comb_promo,
-                            pcv.comb_qty')
+                            pcv.comb_qty,
+                            pcv.image_url')
             ->join('product_combination_value pcv', 'pcv.comb_name_id = pcn.id')
             ->where('pcn.product_id', $product_id)
             ->where('pcn.is_active', 1)
@@ -658,7 +689,8 @@ class AdminProductModel
                 'comb_sku' => $combination->comb_sku,
                 'comb_price' => $combination->comb_price,
                 'comb_promo' => $combination->comb_promo,
-                'comb_qty' => $combination->comb_qty
+                'comb_qty' => $combination->comb_qty,
+                'comb_image' => $combination->image_url
             ];
         }
 

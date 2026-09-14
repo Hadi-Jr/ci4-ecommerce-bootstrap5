@@ -36,6 +36,13 @@
 
                     <ul id="inventory" class="sidebar-dropdown list-unstyled collapse ms-3">
                         <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/add-product') ?>">
+                                <i class="align-middle" data-feather="minus"></i>
+                                <span>Add Product</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
                             <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/products-list') ?>">
                                 <i class="align-middle" data-feather="minus"></i>
                                 <span>Products List</span>

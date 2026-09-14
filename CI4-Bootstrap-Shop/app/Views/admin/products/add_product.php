@@ -174,7 +174,7 @@
                                                 <div class="card-body">
                                                     <p class="card-title fw-semibold mb-3 text-center comb-value"></p>
 
-                                                    <input type="file" class="form-control mb-2 comb-image"
+                                                    <input type="file" class="form-control mb-4 comb-image"
                                                             accept="image/*">
 
                                                     <input type="text" class="form-control mb-2 comb-value-title" placeholder="Title"
@@ -328,7 +328,7 @@
                         <div class="card-body">
                             <p class="card-title fw-semibold mb-3 text-center comb-value"></p>
 
-                            <input type="file" class="form-control mb-2 comb-image"
+                            <input type="file" class="form-control mb-4 comb-image"
                                    accept="image/*">
 
                             <input type="text" class="form-control mb-2 comb-value-title" placeholder="Title"
@@ -368,7 +368,7 @@
             <div class="card-body">
                 <p class="card-title fw-semibold mb-3 text-center comb-value"></p>
 
-                <input type="file" class="form-control mb-2 comb-image"
+                <input type="file" class="form-control mb-4 comb-image"
                        accept="image/*">
 
                 <input type="text" class="form-control mb-2 comb-value-title" placeholder="Title"

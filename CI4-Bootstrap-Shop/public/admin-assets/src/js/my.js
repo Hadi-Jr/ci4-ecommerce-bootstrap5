@@ -30,7 +30,6 @@ $(document).on("click", ".remove-feature", function () {
 $(document).on('click', '.remove-comb-name', function () {
     $(this).closest('.card').remove();
     calculateCombinations();
-    checkForEmptyVariations();
 });
 
 $(document).on('click', '.add-comb-value', function () {
@@ -49,7 +48,6 @@ $(document).on('click', '.removeCombValue', function () {
         combValue.remove();
     }
 
-    checkForEmptyVariations();
     calculateCombinations();
 });
 
@@ -64,7 +62,6 @@ $('#addCombination').on('click', function () {
 
 $('#removeCombinations').on('click', function () {
     $('.combNameContainer .comb-card').remove();
-    checkForEmptyVariations();
     calculateCombinations();
 });
 
@@ -105,31 +102,6 @@ function calculateCombinations() {
         });
     });
 }
-
-// function calculateCombinations() {
-//     $('.combNameContainer .comb-card').each(function (combNameIndex) {
-//         $(this).find('.comb-name').text(`Comb Name ${combNameIndex + 1}`);
-//
-//         $(this).find('.comb-title-value').attr('name', `combinations[${combNameIndex}][title]`);
-//
-//         $(this).find('.combValueContainer').each(function (combValueIndex) {
-//             $(this).find('.comb-value').text(`Comb Value ${combValueIndex + 1}`);
-//
-//             $(this).find('.comb-image')
-//                 .attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][comb-image]`);
-//             $(this).find('.comb-value-title')
-//                 .attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][title]`);
-//
-//             $(this).find('.sku').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][sku]`);
-//
-//             $(this).find('.price').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][price]`);
-//
-//             $(this).find('.promo').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][promo]`);
-//
-//             $(this).find('.qty').attr('name', `combinations[${combNameIndex}][values][${combValueIndex}][qty]`);
-//         });
-//     });
-// }
 
 $(document).on('click', '.remove-attribute', function () {
     $(this).closest('.attr-row').remove();

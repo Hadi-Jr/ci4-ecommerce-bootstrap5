@@ -47,6 +47,9 @@
                                                 <div class="card-body">
                                                     <p class="card-title fw-semibold mb-3 text-center comb-value"></p>
 
+                                                    <input type="file" class="form-control mb-4 comb-image"
+                                                           accept="image/*">
+
                                                     <input type="text" class="form-control mb-2 comb-value-title" placeholder="Title"
                                                            required>
 
@@ -122,6 +125,9 @@
                         <div class="card-body">
                             <p class="card-title fw-semibold mb-3 text-center comb-value"></p>
 
+                            <input type="file" class="form-control mb-4 comb-image"
+                                   accept="image/*">
+
                             <input type="text" class="form-control mb-2 comb-value-title" placeholder="Title"
                                    required>
 
@@ -159,6 +165,9 @@
             <div class="card-body">
                 <p class="card-title fw-semibold mb-3 text-center comb-value"></p>
 
+                <input type="file" class="form-control mb-4 comb-image"
+                       accept="image/*">
+
                 <input type="text" class="form-control mb-2 comb-value-title" placeholder="Title"
                        required>
 
@@ -185,6 +194,7 @@
 
 <script>
     $(document).ready(function () {
+        $('.old-comb-image.disabled').prop('disabled', true);
         calculateCombinations();
     });
 
@@ -272,14 +282,15 @@
 <script>
     $('#edit-comb-btn').on('click', function (e) {
         e.preventDefault();
-        const post_data = $('#edit-comb-form').serializeArray();
-
-        console.log(post_data)
+        $('#edit-comb-btn').prop('disabled', true);
+        let post_data = new FormData($('#edit-comb-form')[0]);
 
         $.ajax({
             url: '<?= base_url('/edit-combinations') ?>',
             method: 'post',
             data: post_data,
+            processData: false,
+            contentType: false,
             dataType: 'json'
         }).done(function (response) {
             if (response.status === 'success') {

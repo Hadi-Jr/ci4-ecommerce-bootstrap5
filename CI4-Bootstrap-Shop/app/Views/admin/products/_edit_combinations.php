@@ -26,6 +26,18 @@ foreach ($product_combinations as $comb_name_id => $combination) {
                             <div class="card-body">
                                 <p class="card-title fw-semibold mb-3 text-center comb-value"></p>
 
+                                <input type="file"
+                                       class="form-control old-comb-image"
+                                       accept="image/*"
+                                       disabled>
+
+                                <?php if (isset($comb_value['comb_image'])) { ?>
+                                    <div class="text-success small mb-2">
+                                        ✓ Existing image
+                                    </div>
+                                <?php
+                                    }?>
+
                                 <input type="text" class="form-control mb-2 comb-value-title" placeholder="Title"
                                        value="<?= $comb_value['comb_value_title'] ?>" required>
 
@@ -85,4 +97,5 @@ foreach ($product_combinations as $comb_name_id => $combination) {
 <?php
     }
 }
+?>
 

@@ -77,7 +77,8 @@ class AdminProductController extends BaseController
                 ]);
             }
 
-            $response = $this->admin_product_model->update_combinations($data);
+            $files = $this->request->getFiles();
+            $response = $this->admin_product_model->update_combinations($data, $files);
             if (!$response) {
                 return $this->response
                     ->setStatusCode(500)
