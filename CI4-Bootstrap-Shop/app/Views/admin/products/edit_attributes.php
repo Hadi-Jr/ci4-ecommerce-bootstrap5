@@ -22,6 +22,8 @@
                         }
                         ?>
                     </select>
+
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-4 attributes">
@@ -31,7 +33,7 @@
                         <div class="attributeContainer">
                             <div class="attr-row mb-3 d-flex gap-3">
                                 <select class="form-select attribute-name" name="attribute_name[]" required>
-                                    <option value="" selected disabled>Attribute Name</option>
+                                    <option value="" selected>Attribute Name</option>
                                     <?php
                                     foreach ($attributes as $attribute) {
                                         ?>
@@ -42,7 +44,7 @@
                                 </select>
 
                                 <select class="form-select attribute-value" name="attribute_value[]" required>
-                                    <option value="" selected disabled>Attribute Value</option>
+                                    <option value="" selected>Attribute Value</option>
                                 </select>
 
                                 <button type="button" class="btn btn-danger remove-attribute" disabled>×</button>
@@ -74,7 +76,7 @@
 <div id="attributeTemplate" class="d-none">
     <div class="attr-row mb-3 d-flex gap-3">
         <select class="form-select attribute-name" name="attribute_name[]" required>
-            <option value="" selected disabled>Attribute Name</option>
+            <option value="" selected>Attribute Name</option>
 
             <?php foreach ($attributes as $attribute): ?>
                 <option value="<?= $attribute->id ?>">
@@ -84,7 +86,7 @@
         </select>
 
         <select class="form-select attribute-value" name="attribute_value[]" required>
-            <option value="" selected disabled>Attribute Value</option>
+            <option value="" selected>Attribute Value</option>
         </select>
 
         <button type="button" class="btn btn-danger remove-attribute">
@@ -177,20 +179,32 @@
                 $('.invalid-feedback').removeClass('d-block');
 
                 $.each(response.errors, function (field, message) {
-                    $('.attr-row').each(function () {
-                        let attr_name = $(this).find('.attribute-name');
-                        let attr_value = $(this).find('.attribute-value');
 
-                        if (attr_name.val() === '') {
-                            attr_name.addClass('is-invalid');
-                        }
+                    if (field.includes('product')) {
 
-                        if (attr_value.val() === '') {
-                            attr_value.addClass('is-invalid');
-                        }
-                    });
+                        $('#products-selector').addClass('is-invalid');
 
-                    $('.attributes .invalid-feedback').text(message);
+                        $('#products-selector')
+                            .siblings('.invalid-feedback')
+                            .text(message)
+                            .addClass('d-block');
+
+                    } else if (field.includes('attribute')) {
+                        $('.attr-row').each(function () {
+                            let attr_name = $(this).find('.attribute-name');
+                            let attr_value = $(this).find('.attribute-value');
+
+                            if (attr_name.val() === '') {
+                                attr_name.addClass('is-invalid');
+                            }
+
+                            if (attr_value.val() === '') {
+                                attr_value.addClass('is-invalid');
+                            }
+                        });
+
+                        $('.attributes .invalid-feedback').text(message).addClass('d-block');
+                    }
                 });
             }
         }).fail(function (xhr) {

@@ -49,12 +49,6 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/') ?>">
-                                <i class="align-middle" data-feather="minus"></i>
-                                <span>Edit Product</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
                             <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/edit-specs') ?>">
                                 <i class="align-middle" data-feather="minus"></i>
                                 <span>Edit Features</span>

@@ -282,7 +282,7 @@
 <script>
     $('#edit-comb-btn').on('click', function (e) {
         e.preventDefault();
-        $('#edit-comb-btn').prop('disabled', true);
+
         let post_data = new FormData($('#edit-comb-form')[0]);
 
         $.ajax({
@@ -319,41 +319,40 @@
                         $('#products-selector').addClass('is-invalid');
 
                         $('#products-selector').siblings('.invalid-feedback').text(message);
-                    }
+                    } else if (field.includes('combinations')) {
+                        $('.comb-card').each(function () {
+                            const comb_name = $(this).find('.comb-title-value');
 
-                    $('.comb-card').each(function () {
-                        const comb_name = $(this).find('.comb-title-value');
-
-                        if (comb_name.val().trim() === '') {
-                            comb_name.addClass('is-invalid');
-                        }
-
-                        $(this).find('.combValueContainer').each(function () {
-                            const comb_title = $(this).find('.comb-value-title');
-                            const comb_sku = $(this).find('.sku');
-                            const comb_price = $(this).find('.price');
-                            const comb_qty = $(this).find('.qty');
-
-                            if (comb_title.val().trim() === '') {
-                                comb_title.addClass('is-invalid');
+                            if (comb_name.val().trim() === '') {
+                                comb_name.addClass('is-invalid');
                             }
 
-                            if (comb_sku.val().trim() === '') {
-                                comb_sku.addClass('is-invalid');
-                            }
+                            $(this).find('.combValueContainer').each(function () {
+                                const comb_title = $(this).find('.comb-value-title');
+                                const comb_sku = $(this).find('.sku');
+                                const comb_price = $(this).find('.price');
+                                const comb_qty = $(this).find('.qty');
 
-                            if (comb_price.val().trim() === '') {
-                                comb_price.addClass('is-invalid');
-                            }
+                                if (comb_title.val().trim() === '') {
+                                    comb_title.addClass('is-invalid');
+                                }
 
-                            if (comb_qty.val().trim() === '') {
-                                comb_qty.addClass('is-invalid');
-                            }
+                                if (comb_sku.val().trim() === '') {
+                                    comb_sku.addClass('is-invalid');
+                                }
 
-                            $('.variants .invalid-feedback').text(message).addClass('d-block');
+                                if (comb_price.val().trim() === '') {
+                                    comb_price.addClass('is-invalid');
+                                }
+
+                                if (comb_qty.val().trim() === '') {
+                                    comb_qty.addClass('is-invalid');
+                                }
+
+                                $('.variants .invalid-feedback').text(message).addClass('d-block');
+                            });
                         });
-                    });
-
+                    }
                 });
             }
         }).fail(function (xhr) {

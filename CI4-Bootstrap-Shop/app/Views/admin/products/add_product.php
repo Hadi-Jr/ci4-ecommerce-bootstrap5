@@ -228,7 +228,7 @@
                         <div class="attributeContainer">
                             <div class="attr-row mb-3 d-flex gap-3">
                                 <select class="form-select attribute-name" name="attribute_name[]" required>
-                                    <option value="" selected disabled>Attribute Name</option>
+                                    <option value="" selected>Attribute Name</option>
                                     <?php
                                         foreach ($attributes as $attribute) {
                                             ?>
@@ -239,7 +239,7 @@
                                 </select>
 
                                 <select class="form-select attribute-value" name="attribute_value[]" required>
-                                    <option value="" selected disabled>Attribute Value</option>
+                                    <option value="" selected>Attribute Value</option>
                                 </select>
 
                                 <button type="button" class="btn btn-danger remove-attribute" disabled>×</button>
@@ -293,7 +293,7 @@
 <div id="attributeTemplate" class="d-none">
     <div class="attr-row mb-3 d-flex gap-3">
         <select class="form-select attribute-name" name="attribute_name[]" required>
-            <option value="" selected disabled>Attribute Name</option>
+            <option value="" selected>Attribute Name</option>
 
             <?php foreach ($attributes as $attribute): ?>
                 <option value="<?= $attribute->id ?>">
@@ -303,7 +303,7 @@
         </select>
 
         <select class="form-select attribute-value" name="attribute_value[]" required>
-            <option value="" selected disabled>Attribute Value</option>
+            <option value="" selected>Attribute Value</option>
         </select>
 
         <button type="button" class="btn btn-danger remove-attribute">
@@ -512,7 +512,7 @@
                             }
                         });
 
-                        $('.attributes .invalid-feedback').text(message);
+                        $('.attributes .invalid-feedback').text(message).addClass('d-block');
                     } else {
                         if (field.includes('general-error')) {
                             let general_error = $('#general-error');

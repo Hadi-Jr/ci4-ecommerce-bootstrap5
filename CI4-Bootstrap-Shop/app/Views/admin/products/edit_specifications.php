@@ -22,6 +22,8 @@
                         }
                         ?>
                     </select>
+
+                    <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3 specs">
@@ -141,20 +143,26 @@
                 $('.invalid-feedback').removeClass('d-block');
 
                 $.each(response.errors, function (field, message) {
-                    $('.feature-row').each(function () {
-                        const feature_key = $(this).find('input[name="feature_key[]"]');
-                        const feature_value = $(this).find('input[name="feature_value[]"]');
+                    if (field.includes('product')) {
+                        $('#products-selector').addClass('is-invalid');
 
-                        if (feature_key.val().trim() === '') {
-                            feature_key.addClass('is-invalid');
-                        }
+                        $('#products-selector').siblings('.invalid-feedback').text(message);
+                    } else if (field.includes('feature')) {
+                        $('.feature-row').each(function () {
+                            const feature_key = $(this).find('input[name="feature_key[]"]');
+                            const feature_value = $(this).find('input[name="feature_value[]"]');
 
-                        if (feature_value.val().trim() === '') {
-                            feature_value.addClass('is-invalid');
-                        }
-                    });
+                            if (feature_key.val().trim() === '') {
+                                feature_key.addClass('is-invalid');
+                            }
 
-                    $('.specs .invalid-feedback').text(message).addClass('d-block');
+                            if (feature_value.val().trim() === '') {
+                                feature_value.addClass('is-invalid');
+                            }
+                        });
+
+                        $('.specs .invalid-feedback').text(message).addClass('d-block');
+                    }
                 });
             }
         }).fail(function (xhr) {

@@ -117,6 +117,12 @@ class AdminProductController extends BaseController
         if ($this->request->getMethod() === 'POST') {
             $data = $this->request->getPost();
             $rules = [
+                'product_id' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Please choose a product'
+                    ]
+                ],
                 'attribute_name.*' => [
                     'rules' => 'required',
                     'errors' => [
@@ -180,6 +186,12 @@ class AdminProductController extends BaseController
         if ($this->request->getMethod() === 'POST') {
             $data = $this->request->getPost();
             $rules = [
+                'product_id' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Please choose a product'
+                    ]
+                ],
                 'feature_key.*' => [
                     'rules' => 'required',
                     'errors' => [
