@@ -121,4 +121,38 @@ $('#products-selector').select2({
     });
 });
 
-
+$(document).ready(function () {
+    $('#productsTable').DataTable({
+        responsive: true,
+        pageLength: 15,
+        lengthMenu: [
+            [15, 25, 50, 100, -1],
+            [15, 25, 50, 100, "All"]
+        ],
+        order: [
+            [0,
+                'desc'
+            ]
+        ],
+        columnDefs: [
+            {
+                orderable: false, targets: [8]
+            }
+        ],
+        language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search products...",
+            lengthMenu: "Show _MENU_ entries",
+            info: "Showing _START_ to _END_ of _TOTAL_ products",
+            infoEmpty: "No products found",
+            infoFiltered: "(filtered from _MAX_ total)",
+            zeroRecords: "No matching products found",
+            paginate: {
+                first: "«",
+                last: "»",
+                next: "›",
+                previous: "‹"
+            }
+        }
+    });
+});

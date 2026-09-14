@@ -1,7 +1,7 @@
 <!-- PRODUCTS LIST START -->
 <div class="row justify-content-center mb-5 p-5">
     <div class="card shadow border-0 table-responsive">
-        <table class="table">
+        <table id="productsTable" class="table">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -11,7 +11,7 @@
                 <th scope="col">Promo</th>
                 <th scope="col">Stock</th>
                 <th scope="col">Units Sold</th>
-<!--                <th scope="col">Reviews</th>-->
+                <th scope="col">Reviews</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
@@ -27,6 +27,7 @@
                     <td class="text-center">€<?= esc($product->promo)?></td>
                     <td class="text-center"><?= esc($product->stock_quantity)?></td>
                     <td class="text-center"><?= esc($product->total_units_sold)?></td>
+                    <td class="text-center"><?= esc(number_format($product->avg_rating, 1)) ?> / 5</td>
                     <td data-id="<?= $product->id ?>">
                         <i class="fa-solid <?= $product->status ? 'fa-toggle-on' : 'fa-toggle-off' ?> pointer status-toggle-btn"
                            data-status="<?= $product->status ? 'activated' : 'deactivated' ?>"
@@ -36,7 +37,7 @@
                         </a>
                     </td>
                 </tr>
-            <?php
+                <?php
             }
             ?>
             </tbody>

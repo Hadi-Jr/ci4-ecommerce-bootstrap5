@@ -50,5 +50,7 @@
     <orderEntry type="library" name="bootstrap-icons" level="application" />
     <orderEntry type="library" name="select2-bootstrap-5-theme" level="application" />
     <orderEntry type="library" name="summernote" level="application" />
+    <orderEntry type="library" name="dataTables.responsive" level="application" />
+    <orderEntry type="library" name="responsive.dataTables" level="application" />
   </component>
 </module>

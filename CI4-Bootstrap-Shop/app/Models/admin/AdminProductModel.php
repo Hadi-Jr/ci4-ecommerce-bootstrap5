@@ -315,8 +315,19 @@ class AdminProductModel
 
     public function get_all_products()
     {
-        return $this->db->table('products')
-            ->select('id, name, price, promo, stock_quantity, sku, status, slug, total_units_sold')
+        return $this->db->table('products p')
+            ->select('p.id, 
+                            p.name, 
+                            p.price, 
+                            p.promo, 
+                            p.stock_quantity, 
+                            p.sku, 
+                            p.status, 
+                            p.slug, 
+                            p.total_units_sold,
+                            avg(r.rating) avg_rating')
+            ->join('reviews r', 'r.product_id = p.id', 'left')
+            ->groupBy('p.id')
             ->get()
             ->getResult();
     }
