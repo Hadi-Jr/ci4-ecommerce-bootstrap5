@@ -20,4 +20,20 @@ class AdminCategoryModel
             ->get()
             ->getResult();
     }
+
+    public function change_category_status($category_id)
+    {
+        $category_status = $this->db->table('categories')
+            ->where('id', $category_id)
+            ->get()
+            ->getRow('is_active');
+
+        $new_status = $category_status == 1 ? 0 : 1;
+
+        $this->db->table('categories')
+            ->where('id', $category_id)
+            ->update([
+                'is_active' => $new_status
+            ]);
+    }
 }

@@ -41,7 +41,10 @@ $routes->add('/add-favorite/(:any)', 'FavoritesController::add_favorite/$1', ['f
 $routes->add('/remove-favorite', 'FavoritesController::remove_favorite', ['filters' => 'auth']);
 
 /************************************* ADMIN ROUTES *************************************/
+// Dashboard
 $routes->add('/dashboard', 'Admin\AdminProductController::add_product', ['filter' => 'admin']);
+
+// Products
 $routes->add('/add-product', 'Admin\AdminProductController::add_product', ['filter' => 'admin']);
 $routes->add('/get-attribute-values/(:any)', 'Admin\AdminProductController::get_attribute_values/$1', ['filter' => 'admin']);
 $routes->add('/products-list', 'Admin\AdminProductController::products_list', ['filter' => 'admin']);
@@ -51,4 +54,7 @@ $routes->add('/edit-product', 'Admin\AdminProductController::edit_product', ['fi
 $routes->add('/edit-specs', 'Admin\AdminProductController::edit_specs', ['filter' => 'admin']);
 $routes->add('/edit-attributes', 'Admin\AdminProductController::edit_attributes', ['filter' => 'admin']);
 $routes->add('/edit-combinations', 'Admin\AdminProductController::edit_combinations', ['filter' => 'admin']);
+
+// Categories
 $routes->add('/categories', 'Admin\AdminCategoryController::view', ['filter' => 'admin']);
+$routes->post('/change-category-status', 'Admin\AdminCategoryController::change_category_status', ['filter' => 'admin']);

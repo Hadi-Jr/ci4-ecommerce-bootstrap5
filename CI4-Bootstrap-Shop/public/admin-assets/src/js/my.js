@@ -12,6 +12,7 @@ $("#add-product-form input#product_name").on("input", function () {
         .replaceAll("`", "-")
         .replaceAll(";", "-")
         .replaceAll("+", "-plus")
+        .replaceAll("-", "-minus")
         .toLowerCase();
 
     $("#add-product-form input#slug").val(name_value);

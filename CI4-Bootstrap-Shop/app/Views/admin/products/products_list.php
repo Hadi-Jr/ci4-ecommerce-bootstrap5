@@ -65,7 +65,7 @@
                     data: {
                         product_id: product_id,
                     },
-                    type: 'json'
+                    dataType: 'json'
                 }).done(function (response) {
                     if (response.status === 'success') {
                         toggle_btn.toggleClass('fa-toggle-on fa-toggle-off');

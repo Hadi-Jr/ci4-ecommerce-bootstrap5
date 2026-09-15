@@ -28,4 +28,15 @@ class AdminCategoryController extends BaseController
             . view('admin/categories/categories_view')
             . view('admin/templates/footer' );
     }
+
+    public function change_category_status()
+    {
+        $post_data = $this->request->getPost();
+
+        $this->admin_category_model->change_category_status($post_data['category_id']);
+
+        return $this->response->setJSON([
+            'status' => 'success',
+        ]);
+    }
 }
