@@ -51,3 +51,4 @@ $routes->add('/edit-product', 'Admin\AdminProductController::edit_product', ['fi
 $routes->add('/edit-specs', 'Admin\AdminProductController::edit_specs', ['filter' => 'admin']);
 $routes->add('/edit-attributes', 'Admin\AdminProductController::edit_attributes', ['filter' => 'admin']);
 $routes->add('/edit-combinations', 'Admin\AdminProductController::edit_combinations', ['filter' => 'admin']);
+$routes->add('/categories', 'Admin\AdminCategoryController::view', ['filter' => 'admin']);

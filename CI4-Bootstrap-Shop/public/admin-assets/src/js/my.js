@@ -130,13 +130,15 @@ $(document).ready(function () {
             [15, 25, 50, 100, "All"]
         ],
         order: [
-            [0,
-                'desc'
+            [
+                0,
+                'asc'
             ]
         ],
         columnDefs: [
             {
-                orderable: false, targets: [8]
+                orderable: false,
+                targets: [8]
             }
         ],
         language: {
@@ -147,6 +149,35 @@ $(document).ready(function () {
             infoEmpty: "No products found",
             infoFiltered: "(filtered from _MAX_ total)",
             zeroRecords: "No matching products found",
+            paginate: {
+                first: "«",
+                last: "»",
+                next: "›",
+                previous: "‹"
+            }
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('#categoriesTable').DataTable({
+        responsive: true,
+        pageLength: 15,
+        lengthMenu: [
+            [15, 25, 50, 100, -1],
+            [15, 25, 50, 100, "All"]
+        ],
+        order: [
+            [0, 'asc']
+        ],
+        language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search categories...",
+            lengthMenu: "Show _MENU_ entries",
+            info: "Showing _START_ to _END_ of _TOTAL_ categories",
+            infoEmpty: "No categories found",
+            infoFiltered: "(filtered from _MAX_ total)",
+            zeroRecords: "No matching categories found",
             paginate: {
                 first: "«",
                 last: "»",
