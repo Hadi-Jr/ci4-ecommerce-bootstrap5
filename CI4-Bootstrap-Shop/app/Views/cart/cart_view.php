@@ -319,6 +319,8 @@
                             timer: 3000,
                             timerProgressBar: true
                         });
+                    } else {
+                        window.location.reload();
                     }
                 });
             }
