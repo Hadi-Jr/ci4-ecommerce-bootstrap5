@@ -81,7 +81,7 @@ class AdminCategoryModel
         }
 
         $child_ids = array_column($this->get_category_child($category_id), 'id');
-        if ($parent_id) {
+        if ($parent_id !== null) {
             if (in_array($parent_id, $child_ids)) {
                 if ($transfer_children) {
                     $this->remove_parent([$category_id]);
@@ -145,10 +145,10 @@ class AdminCategoryModel
         }
     }
 
-    public function get_category_products($parent_id)
+    public function get_category_products($category_id)
     {
         return $this->db->table('products')
-            ->where('category_id', $parent_id)
+            ->where('category_id', $category_id)
             ->get()
             ->getResult();
     }
@@ -166,5 +166,41 @@ class AdminCategoryModel
 
         $this->db->table('products')
             ->updateBatch($data, 'id');
+    }
+
+    public function add_category($post_data)
+    {
+        $this->db->transStart();
+
+        $parent_id = $post_data['parent_id'] ?? null;
+        if ($parent_id === '') {
+            $parent_id = null;
+        }
+
+        $category_name = $post_data['category_name'];
+        $new_cat_slug = $post_data['slug'];
+
+        $parent_category_products = $this->get_category_products($parent_id);
+        if (!empty($parent_category_products)) {
+            $this->db->table('categories')
+                ->insert([
+                    'name' => 'Others',
+                    'parent_id' => $parent_id,
+                    'slug' => 'others-' . $parent_id
+                ]);
+
+            $others_cat_id = $this->db->insertID();
+            $this->transfer_products_to_category($others_cat_id, $parent_category_products);
+        }
+
+        $this->db->table('categories')
+            ->insert([
+                'name' => $category_name,
+                'parent_id' => $parent_id,
+                'slug' => $new_cat_slug
+            ]);
+
+        $this->db->transComplete();
+        return $this->db->transStatus();
     }
 }

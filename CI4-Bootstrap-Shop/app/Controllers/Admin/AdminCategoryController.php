@@ -36,9 +36,10 @@ class AdminCategoryController extends BaseController
 
             $rules = [
                 'category_name' => [
-                    'rules' => 'required',
+                    'rules' => 'required|is_unique[categories.name]',
                     'errors' => [
-                        'required' => 'Please enter a category name'
+                        'required' => 'Please enter a category name',
+                        'is_unique' => 'Category already exists',
                     ]
                 ]
             ];
@@ -50,7 +51,7 @@ class AdminCategoryController extends BaseController
                 ]);
             }
 
-            $response = $this->admin_category_model->update_category($post_data);
+            $response = $this->admin_category_model->add_category($post_data);
             if (!$response) {
                 return $this->response
                     ->setStatusCode(500)->setJSON([
@@ -63,7 +64,7 @@ class AdminCategoryController extends BaseController
 
             return $this->response->setJSON([
                 'status' => 'success',
-                'message' => 'Category has been updated successfully'
+                'message' => 'Category has been added successfully'
             ]);
         }
 

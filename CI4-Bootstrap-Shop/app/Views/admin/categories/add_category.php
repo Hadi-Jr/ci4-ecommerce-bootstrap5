@@ -2,7 +2,7 @@
     <div class="col-12 col-md-10 col-lg-8">
         <div class="card p-4 shadow border-0">
 
-            <form id="edit-category-form">
+            <form id="add-category-form">
 
                 <div class="row justify-content-end mb-3 mb-md-0 p-2">
                     <div class="col-auto">
@@ -21,7 +21,7 @@
                 <div class="row mb-5">
                     <div class="col-12 text-center">
                         <h3 class="fw-bold">
-                            Edit Category
+                            Add Category
                         </h3>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                     <div class="col-12 col-md-6 mb-3">
                         <label for="parent_id" class="form-label fw-bold">Parent Id</label>
                         <input type="text" class="form-control" id="parent_id" name="parent_id"
-                               placeholder="-" value="" readonly>
+                               placeholder="-" readonly>
                         <small class="text-muted">Auto-generated from parent category</small>
                         <div class="invalid-feedback"></div>
                     </div>
@@ -83,7 +83,7 @@
                     <div class="col-12 col-md-6 mb-3">
                         <label for="parent_name" class="form-label fw-bold">Parent Name</label>
                         <input type="text" class="form-control" id="parent_name" name="parent_name"
-                               placeholder="-" value="" readonly>
+                               placeholder="-" readonly>
                         <small class="text-muted">Auto-generated from parent category</small>
 
                         <div class="invalid-feedback"></div>
@@ -91,27 +91,18 @@
                 </div>
 
                 <div class="row mb-4">
-                    <div class="col-12 col-md-6 mb-3">
+                    <div class="col-12">
                         <label for="slug" class="form-label fw-bold">Slug</label>
-                        <input type="text" class="form-control" id="category_slug" name="slug"
-                               value="" readonly>
+                        <input type="text" class="form-control" id="category_slug" name="slug" readonly>
                         <small class="text-muted">Auto-generated from category name</small>
                         <div class="invalid-feedback"></div>
-                    </div>
-                    <div class="col-12 col-md-6 mb-3">
-                        <label for="transfer_children" class="form-label fw-bold">Transfer Children</label>
-                        <select class="form-select" id="transfer_children" name="transfer_children" aria-label="Transfer child categories">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                        <small class="text-muted">This will transfer the parent category and its children to the new category.</small>
                     </div>
                 </div>
 
                 <div class="row mt-2">
                     <div class="col-12">
-                        <button class="btn w-100 fw-bold btn-secondary" id="edit-category-btn">
-                            Edit Category
+                        <button class="btn w-100 fw-bold btn-secondary" id="add-category-btn">
+                            Add Category
                         </button>
                     </div>
                 </div>
@@ -121,3 +112,66 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('.category-option').on('click', function (e) {
+        e.preventDefault();
+
+        $(this).closest('.dropdown').find('.dropdown-toggle').dropdown('hide');
+        let parent_id = $(this).data('id') === 'null' ? null : $(this).data('id');
+        let parent_name = $(this).data('name');
+
+        $('#parent_id').val(parent_id);
+        $('#parent_name').val(parent_name);
+    });
+
+    $('#add-category-btn').on('click', function (e) {
+        e.preventDefault();
+
+        const post_data = $('#add-category-form').serializeArray();
+
+        $.ajax({
+            url: '<?= base_url('/add-category') ?>',
+            method: 'post',
+            data: post_data,
+            dataType: 'json'
+        }).done(function (response) {
+            if (response.status === 'success') {
+                Swal.fire({
+                    icon: "success",
+                    title: response.message,
+                    toast: true,
+                    position: "bottom-left",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    background: "#fff",
+                    color: "#333",
+                });
+
+                setTimeout(function () {
+                    location.reload()
+                }, 2000);
+            } else if (response.status === 'error') {
+                $('.is-invalid').removeClass('is-invalid');
+                $('.invalid-feedback').removeClass('d-block');
+
+                $.each(response.errors, function (field, message) {
+                    const input = $(`#${field}`);
+                    input.addClass('is-invalid');
+                    input.siblings('.invalid-feedback').text(message);
+                });
+            }
+        }).fail(function (xhr) {
+            let message = xhr.responseJSON?.message;
+            $('#general-error').html(`
+                    <div class="alert alert-danger">
+                        <strong>Oops!</strong><br>
+                        ${message}
+                    </div>
+                `);
+
+            $('#add-attr-btn').prop('disabled', true);
+        });;
+    })
+</script>
