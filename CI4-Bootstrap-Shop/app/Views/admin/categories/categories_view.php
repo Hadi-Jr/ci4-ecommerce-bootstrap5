@@ -2,14 +2,14 @@
     <div class="card shadow border-0 table-responsive">
         <table id="categoriesTable" class="table">
             <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Category Name</th>
-                <th scope="col">Parent ID</th>
-                <th scope="col">Slug</th>
-                <th scope="col">Status</th>
-                <th scope="col">Actions</th>
-            </tr>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Parent ID</th>
+                    <th scope="col">Slug</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
             </thead>
             <tbody class="table-group-divider">
             <?php
@@ -28,8 +28,9 @@
                 <td data-id="<?= $category->id ?>">
                     <i class="fa-solid <?= $category->is_active ? 'fa-toggle-on' : 'fa-toggle-off' ?> pointer status-toggle-btn"
                        data-status="<?= $category->is_active ? 'activated' : 'deactivated' ?>"
-                       style="font-size: 20px;"></i>
-                    <a href="<?= base_url('/edit-product-view/') . $category->id ?>">
+                       style="font-size: 20px;">
+                    </i>
+                    <a href="<?= base_url('/edit-category-view/') . $category->id ?>">
                         <i class="fa-solid fa-pen-to-square pointer ms-1" style="font-size: 20px;"></i>
                     </a>
                 </td>

@@ -7,8 +7,12 @@
 
                 <div class="row justify-content-end mb-3 mb-md-0 p-2">
                     <div class="col-auto">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="statusSwitch" name="status" checked>
+                        <div id="status" class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox"
+                                   id="statusSwitch"
+                                   data-checked="Available"
+                                   data-unchecked="Not Available"
+                                   name="status" checked>
                             <label class="form-check-label status-label" for="statusSwitch">Available</label>
                         </div>
                     </div>

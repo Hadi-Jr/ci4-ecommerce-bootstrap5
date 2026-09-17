@@ -1,8 +1,9 @@
-$("#statusSwitch").on("change", function () {
+$("#status input[type='checkbox']").on('change', function () {
     const status_label = $('.status-label');
+
     this.checked
-        ? status_label.text("Available")
-        : status_label.text("Not Available");
+        ? status_label.text($(this).data('checked'))
+        : status_label.text($(this).data('unchecked'));
 });
 
 $("#add-product-form input#product_name").on("input", function () {
@@ -12,10 +13,21 @@ $("#add-product-form input#product_name").on("input", function () {
         .replaceAll("`", "-")
         .replaceAll(";", "-")
         .replaceAll("+", "-plus")
-        .replaceAll("-", "-minus")
         .toLowerCase();
 
     $("#add-product-form input#slug").val(name_value);
+});
+
+$('input#category_name').on('input', function () {
+    let category_name = this.value
+        .replaceAll(" ", "-")
+        .replaceAll("'", "-")
+        .replaceAll("`", "-")
+        .replaceAll(";", "-")
+        .replaceAll("+", "-plus")
+        .toLowerCase();
+
+    $('#category_slug').val(category_name);
 });
 
 $("button#addFeature").on("click", function () {

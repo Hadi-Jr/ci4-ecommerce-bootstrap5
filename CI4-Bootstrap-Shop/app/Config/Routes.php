@@ -58,3 +58,6 @@ $routes->add('/edit-combinations', 'Admin\AdminProductController::edit_combinati
 // Categories
 $routes->add('/categories', 'Admin\AdminCategoryController::view', ['filter' => 'admin']);
 $routes->post('/change-category-status', 'Admin\AdminCategoryController::change_category_status', ['filter' => 'admin']);
+$routes->add('/edit-category-view/(:any)', 'Admin\AdminCategoryController::edit_category_view/$1', ['filter' => 'admin']);
+$routes->add('/edit-category-view/(:any)', 'Admin\AdminCategoryController::edit_category_view/$1', ['filter' => 'admin']);
+$routes->add('/edit-category', 'Admin\AdminCategoryController::edit_category', ['filter' => 'admin']);

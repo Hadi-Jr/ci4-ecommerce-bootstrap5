@@ -74,12 +74,14 @@ class BaseController extends Controller
         //Categories
         $this->category_model = new CategoryModel($db);
 
-        $cache = cache();
-        $all_categories = $cache->get('all_categories');
-        if ($all_categories === null) {
-            $all_categories = $this->category_model->get_all_Categories();
-            $cache->save('all_categories', $all_categories, 3600);
-        }
+//        $cache = cache();
+//        $all_categories = $cache->get('all_categories');
+//        if ($all_categories === null) {
+//            $all_categories = $this->category_model->get_all_Categories();
+//            $cache->save('all_categories', $all_categories, 3600);
+//        }
+
+        $all_categories = $this->category_model->get_all_Categories();
 
         $this->category_tree = $this->category_model->get_nested_categories($all_categories);
 

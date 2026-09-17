@@ -16,24 +16,19 @@
 
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <button class="dropdown-item" type="button">
+                                    <a href="<?= base_url('/edit-specs') ?>" class="dropdown-item" type="button">
                                         Edit Specifications
-                                    </button>
+                                    </a>
                                 </li>
                                 <li>
-                                    <button class="dropdown-item" type="button">
+                                    <a href="<?= base_url('/edit-combinations') ?>" class="dropdown-item" type="button">
                                         Edit Combinations
-                                    </button>
+                                    </a>
                                 </li>
                                 <li>
-                                    <button class="dropdown-item" type="button">
+                                    <a href="<?= base_url('/edit-attributes') ?>" class="dropdown-item" type="button">
                                         Edit Attributes
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="dropdown-item" type="button">
-                                        Edit Images
-                                    </button>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
