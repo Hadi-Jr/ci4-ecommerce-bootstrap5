@@ -20,12 +20,30 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="<?= base_url('/categories') ?>">
+                <!--  Categories   -->
+                <li class="sidebar-item parent">
+                    <a data-bs-target="#category" data-bs-toggle="collapse" class="sidebar-link collapsed" href="#">
                         <i class="align-middle" data-feather="grid"></i>
                         <span class="align-middle">Categories</span>
                     </a>
+
+                    <ul id="category" class="sidebar-dropdown list-unstyled collapse ms-3">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/categories') ?>">
+                                <i class="align-middle" data-feather="minus"></i>
+                                <span>Categories List</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/add-category') ?>">
+                                <i class="align-middle" data-feather="minus"></i>
+                                <span>Add Category</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
 
                 <!-- Inventory -->
                 <li class="sidebar-item parent">

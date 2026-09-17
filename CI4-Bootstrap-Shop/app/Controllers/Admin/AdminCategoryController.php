@@ -29,6 +29,53 @@ class AdminCategoryController extends BaseController
             . view('admin/templates/footer' );
     }
 
+    public function add_category()
+    {
+        if ($this->request->getMethod() === 'POST') {
+            $post_data = $this->request->getPost();
+
+            $rules = [
+                'category_name' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Please enter a category name'
+                    ]
+                ]
+            ];
+
+            if (!$this->validate($rules)) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'errors' => $this->validator->getErrors()
+                ]);
+            }
+
+            $response = $this->admin_category_model->update_category($post_data);
+            if (!$response) {
+                return $this->response
+                    ->setStatusCode(500)->setJSON([
+                        'status' => 'error',
+                        'errors' => [
+                            'general-error' => 'Something went wrong, please try again later'
+                        ]
+                    ]);
+            }
+
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Category has been updated successfully'
+            ]);
+        }
+
+        $all_categories = $this->admin_category_model->get_categories();
+        $this->data['all_categories'] = $all_categories;
+
+        return view('admin/templates/meta', $this->data)
+            . view('admin/templates/header')
+            . view('admin/categories/add_category')
+            . view('admin/templates/footer' );
+    }
+
     public function change_category_status()
     {
         $post_data = $this->request->getPost();

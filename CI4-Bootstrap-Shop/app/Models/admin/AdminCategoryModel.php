@@ -57,6 +57,10 @@ class AdminCategoryModel
         $this->db->transStart();
 
         $parent_id = $post_data['parent_id'] ?? null;
+        if ($parent_id === '') {
+            $parent_id = null;
+        }
+
         $category_id = $post_data['category_id'];
         $category_name = $post_data['category_name'];
         $status = $post_data['status'] === 'on' ? 1 : 0;

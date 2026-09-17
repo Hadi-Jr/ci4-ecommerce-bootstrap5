@@ -61,3 +61,4 @@ $routes->post('/change-category-status', 'Admin\AdminCategoryController::change_
 $routes->add('/edit-category-view/(:any)', 'Admin\AdminCategoryController::edit_category_view/$1', ['filter' => 'admin']);
 $routes->add('/edit-category-view/(:any)', 'Admin\AdminCategoryController::edit_category_view/$1', ['filter' => 'admin']);
 $routes->add('/edit-category', 'Admin\AdminCategoryController::edit_category', ['filter' => 'admin']);
+$routes->add('/add-category', 'Admin\AdminCategoryController::add_category', ['filter' => 'admin']);
