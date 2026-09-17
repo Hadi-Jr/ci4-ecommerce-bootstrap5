@@ -1,6 +1,6 @@
 <!-- ADD PRODUCT START -->
 
-<div class="row justify-content-center mt-5 mb-5">
+<div class="row justify-content-center mt-3 mb-5">
     <div class="col-12 col-md-10 col-lg-8">
         <div class="card p-4 shadow border-0">
             <form id="add-product-form">

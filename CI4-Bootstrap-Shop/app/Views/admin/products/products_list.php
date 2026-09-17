@@ -1,5 +1,7 @@
 <!-- PRODUCTS LIST START -->
-<div class="row justify-content-center mb-5 p-5">
+<h1 class="h3 mb-3"><strong>Products</strong> Table</h1>
+
+<div class="row justify-content-center mb-5">
     <div class="card shadow border-0 table-responsive">
         <table id="productsTable" class="table">
             <thead>

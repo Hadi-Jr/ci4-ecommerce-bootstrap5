@@ -119,6 +119,7 @@
             </div>
         </nav>
 
-
+        <main class="content">
+            <div class="container-fluid p-0" bis_skin_checked="1">
 
 
