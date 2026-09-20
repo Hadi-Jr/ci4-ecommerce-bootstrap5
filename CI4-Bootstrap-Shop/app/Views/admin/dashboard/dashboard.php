@@ -194,6 +194,7 @@
                     <th>View</th>
                     <th>Name</th>
                     <th>Stock</th>
+                    <th>SKU</th>
                     <th>Units sold</th>
                 </tr>
                 </thead>
@@ -216,6 +217,7 @@
                                 </td>
                                 <td><?= $product->name ?></td>
                                 <td><?= $product->stock_quantity ?></td>
+                                <td><?= $product->sku ?></td>
                                 <td><?= $product->total_units_sold ?></td>
                             </tr>
                             <?php

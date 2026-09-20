@@ -134,7 +134,8 @@ class AdminProductModel
             ->select('name,
                             stock_quantity,
                             slug,
-                            total_units_sold')
+                            total_units_sold,
+                            sku')
             ->where('stock_quantity < ', 50)
             ->get()
             ->getResult();
