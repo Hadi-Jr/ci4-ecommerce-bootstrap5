@@ -69,7 +69,7 @@ $routes->add('/add-category', 'Admin\AdminCategoryController::add_category', ['f
 // Orders
 $routes->add('/admin/orders-list', 'Admin\AdminOrdersController::view', ['filter' => 'admin']);
 $routes->add('/change-order-status', 'Admin\AdminOrdersController::change_status', ['filter' => 'admin']);
-
+$routes->add('/admin/order_detail/(:any)', 'Admin\AdminOrdersController::order_details/$1', ['filter' => 'admin']);
 
 
 

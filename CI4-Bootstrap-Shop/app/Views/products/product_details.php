@@ -257,87 +257,94 @@
     </div>
 </div>
 
-<div class="row mt-5">
-    <div class="container py-5">
+<?php
+if (!empty($related_products)) {
+    ?>
+    <div class="row mt-5">
+        <div class="container py-5">
 
-        <div class="row">
-            <div class="col-12 text-center mb-4">
-                <h4 class="fw-bold">Related Products</h4>
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <h4 class="fw-bold">Related Products</h4>
+                </div>
             </div>
-        </div>
 
-        <div class="position-relative">
-            <div class="swiper product-swiper">
-                <div class="swiper-wrapper">
-                    <?php
-                    foreach ($related_products as $related_product) {
-                        ?>
-                        <div class="swiper-slide">
-                            <div class="card h-100">
-                                <img class="card-img-top p-3" src="<?= base_url($related_product->image_url) ?>" alt="Product 1">
-                                <div class="card-body p-3">
-                                    <a href="<?= base_url('/product/' . $related_product->slug)?>"
-                                       class="card-title fw-semibold mb-2"><?= $related_product->name ?></a>
-                                </div>
-                                <div class="prices px-3 fw-bold text-secondary">
-                                    <?php
-                                    if ($related_product->promo > 0.0) {
-                                        ?>
-                                        <div class="related-price-del">
-                                            <del>
+            <div class="position-relative">
+                <div class="swiper product-swiper">
+                    <div class="swiper-wrapper">
+                        <?php
+                        foreach ($related_products as $related_product) {
+                            ?>
+                            <div class="swiper-slide">
+                                <div class="card h-100">
+                                    <img class="card-img-top p-3" src="<?= base_url($related_product->image_url) ?>" alt="Product 1">
+                                    <div class="card-body p-3">
+                                        <a href="<?= base_url('/product/' . $related_product->slug)?>"
+                                           class="card-title fw-semibold mb-2"><?= $related_product->name ?></a>
+                                    </div>
+                                    <div class="prices px-3 fw-bold text-secondary">
+                                        <?php
+                                        if ($related_product->promo > 0.0) {
+                                            ?>
+                                            <div class="related-price-del">
+                                                <del>
+                                                    <?= '€' . $related_product->price ?>
+                                                </del>
+                                            </div>
+
+                                            <div class="related-price-current">
+                                                <?= '€' . $related_product->promo ?>
+                                            </div>
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <div class="related-price-current">
                                                 <?= '€' . $related_product->price ?>
-                                            </del>
-                                        </div>
-
-                                        <div class="related-price-current">
-                                            <?= '€' . $related_product->promo ?>
-                                        </div>
-                                        <?php
-                                    } else {
+                                            </div>
+                                            <?php
+                                        }
                                         ?>
-                                        <div class="related-price-current">
-                                            <?= '€' . $related_product->price ?>
-                                        </div>
-                                        <?php
+                                    </div>
+                                    <?php
+                                    $in_stock = true;
+                                    if ($related_product->stock_quantity == 0) {
+                                        $in_stock = false;
                                     }
                                     ?>
-                                </div>
-                                <?php
-                                $in_stock = true;
-                                if ($related_product->stock_quantity == 0) {
-                                    $in_stock = false;
-                                }
-                                ?>
-                                <div class="p-2 mt-auto">
-                                    <button data-product-id="<?= $related_product->id ?>"
-                                            class="d-none d-sm-block btn w-100 fw-bold green-btn
+                                    <div class="p-2 mt-auto">
+                                        <button data-product-id="<?= $related_product->id ?>"
+                                                class="d-none d-sm-block btn w-100 fw-bold green-btn
                                             add-to-cart-btn rel-products-atc-button
                                             <?= !$in_stock ? 'disabled' : '' ?>">
-                                        <i class="fa-solid fa-bag-shopping me-1"></i>
-                                        <?= !$in_stock ? 'Out Of Stock' : 'Add to Cart' ?>
-                                    </button>
-                                    <button data-product-id="<?= $related_product->id ?>"
-                                        class="d-sm-none btn w-100 swiper-icon-btn green-btn add-to-cart-btn
+                                            <i class="fa-solid fa-bag-shopping me-1"></i>
+                                            <?= !$in_stock ? 'Out Of Stock' : 'Add to Cart' ?>
+                                        </button>
+                                        <button data-product-id="<?= $related_product->id ?>"
+                                                class="d-sm-none btn w-100 swiper-icon-btn green-btn add-to-cart-btn
                                             rel-products-atc-button">
-                                        <i class="fa-solid fa-bag-shopping"></i>
-                                    </button>
+                                            <i class="fa-solid fa-bag-shopping"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
 
-                <div class="mt-2 d-none d-md-block">
-                    <div class="swiper-button-next rounded-3"></div>
-                    <div class="swiper-button-prev rounded-3"></div>
-                    <div class="swiper-pagination"></div>
+                    <div class="mt-2 d-none d-md-block">
+                        <div class="swiper-button-next rounded-3"></div>
+                        <div class="swiper-button-prev rounded-3"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+<?php
+}
+?>
+
 
 <div class="row mt-5">
     <div class="col-12 text-center mb-4">

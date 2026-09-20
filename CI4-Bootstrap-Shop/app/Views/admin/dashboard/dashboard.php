@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
-                        <div class="card-body" >
+                        <div class="card-body">
                             <div class="row" >
                                 <div class="col mt-0" >
                                     <h5 class="card-title">Average Order Value</h5>
@@ -247,9 +247,9 @@
                     ?>
                     <tr>
                         <td>
-                            <a href="<?= base_url('/product/' ) ?>">
-                                <i class="fa-solid fa-link"></i>
-                            </a>
+                            <button data-id="<?= $recent_order->id ?>" class="btn btn-primary btn-sm view-order-btn">
+                                <i class="fas fa-eye"></i>
+                            </button>
                         </td>
                         <td><?= $recent_order->email_address ?></td>
                         <td>$<?= $recent_order->total_amount ?></td>
@@ -274,3 +274,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('.view-order-btn').on('click', function (e) {
+        e.preventDefault();
+        const order_id = $(this).data('id');
+
+        $.ajax({
+            url: '<?= base_url('/admin/order_detail/') ?>' + order_id,
+            method: 'GET',
+        }).done(function (response) {
+            Swal.fire({
+                title: 'Order Details',
+                html: response,
+                width: 1000,
+                showCloseButton: true
+            });
+        });
+    });
+</script>

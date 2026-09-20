@@ -22,14 +22,14 @@
             foreach ($products as $product) {
                 ?>
                 <tr>
-                    <td><?= esc($product->id) ?></td>
-                    <td><a href="<?= base_url('/product/' . $product->slug) ?>"><?= esc($product->name)?></a></td>
-                    <td><?= esc($product->sku)?></td>
-                    <td class="text-center">€<?= esc($product->price)?></td>
-                    <td class="text-center">€<?= esc($product->promo)?></td>
-                    <td class="text-center"><?= esc($product->stock_quantity)?></td>
-                    <td class="text-center"><?= esc($product->total_units_sold)?></td>
-                    <td class="text-center"><?= esc(number_format($product->avg_rating, 1)) ?> / 5</td>
+                    <td><?= $product->id ?></td>
+                    <td><a href="<?= base_url('/product/' . $product->slug) ?>"><?= $product->name ?></a></td>
+                    <td><?= $product->sku?></td>
+                    <td class="text-center">€<?= $product->price?></td>
+                    <td class="text-center">€<?= $product->promo?></td>
+                    <td class="text-center"><?= $product->stock_quantity?></td>
+                    <td class="text-center"><?= $product->total_units_sold?></td>
+                    <td class="text-center"><?= number_format($product->avg_rating, 1) ?> / 5</td>
                     <td data-id="<?= $product->id ?>">
                         <i class="fa-solid <?= $product->status ? 'fa-toggle-on' : 'fa-toggle-off' ?> pointer status-toggle-btn"
                            data-status="<?= $product->status ? 'activated' : 'deactivated' ?>"

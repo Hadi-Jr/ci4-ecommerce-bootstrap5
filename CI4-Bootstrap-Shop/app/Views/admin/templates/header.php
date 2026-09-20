@@ -7,7 +7,6 @@
             </a>
 
             <ul class="sidebar-nav">
-
                 <li class="sidebar-header">
                     Inventory and operations
                 </li>
@@ -17,6 +16,14 @@
                     <a class="sidebar-link" href="<?= base_url('/dashboard') ?>">
                         <i class="align-middle" data-feather="sliders"></i>
                         <span class="align-middle">Dashboard</span>
+                    </a>
+                </li>
+
+                <!-- Orders -->
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?= base_url('/admin/orders-list') ?>">
+                        <i class="align-middle" data-feather="clipboard"></i>
+                        <span class="align-middle">Orders</span>
                     </a>
                 </li>
 
@@ -86,7 +93,6 @@
                         </li>
                     </ul>
                 </li>
-
             </ul>
         </div>
     </nav>
@@ -111,7 +117,7 @@
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+                            <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
                             <a class="dropdown-item" href="<?= base_url('/logout') ?>">Log out</a>
                         </div>
                     </li>
@@ -120,6 +126,6 @@
         </nav>
 
         <main class="content">
-            <div class="container-fluid p-0" bis_skin_checked="1">
+            <div class="container-fluid p-0">
 
 

@@ -54,5 +54,6 @@
     <orderEntry type="library" name="responsive.dataTables" level="application" />
     <orderEntry type="library" name="jstree" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="responsive.bootstrap5" level="application" />
   </component>
 </module>

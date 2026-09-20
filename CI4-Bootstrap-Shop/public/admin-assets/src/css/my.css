@@ -1,0 +1,23 @@
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    width: 250px;
+}
+
+#ordersTable th {
+    font-size: 11px;
+}
+
+#ordersTable td {
+    font-size: 13px;
+}
+
+.admin-order-details-table th, td{
+    font-size: 13px;
+}
+
+.admin-order-details-table {
+    table-layout: fixed;
+}

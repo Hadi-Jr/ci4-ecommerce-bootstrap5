@@ -56,4 +56,10 @@ class UserModel
         return $user;
     }
 
+    public function registered_users()
+    {
+        return $this->db->table('users')
+            ->where('role', 'user')
+            ->countAllResults();
+    }
 }
