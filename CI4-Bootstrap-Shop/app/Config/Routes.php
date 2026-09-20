@@ -42,7 +42,7 @@ $routes->add('/remove-favorite', 'FavoritesController::remove_favorite', ['filte
 
 /************************************* ADMIN ROUTES *************************************/
 // Dashboard
-$routes->add('/dashboard', 'Admin\AdminProductController::add_product', ['filter' => 'admin']);
+$routes->add('/dashboard', 'Admin\AdminDashboardController::view', ['filter' => 'admin']);
 
 // Products
 $routes->add('/add-product', 'Admin\AdminProductController::add_product', ['filter' => 'admin']);
@@ -62,3 +62,9 @@ $routes->add('/edit-category-view/(:any)', 'Admin\AdminCategoryController::edit_
 $routes->add('/edit-category-view/(:any)', 'Admin\AdminCategoryController::edit_category_view/$1', ['filter' => 'admin']);
 $routes->add('/edit-category', 'Admin\AdminCategoryController::edit_category', ['filter' => 'admin']);
 $routes->add('/add-category', 'Admin\AdminCategoryController::add_category', ['filter' => 'admin']);
+
+
+// Orders
+$routes->add('/admin/orders-list', 'Admin\AdminOrdersController::view', ['filter' => 'admin']);
+$routes->add('/change-order-status', 'Admin\AdminOrdersController::change_status', ['filter' => 'admin']);
+

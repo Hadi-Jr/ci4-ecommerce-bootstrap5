@@ -119,6 +119,41 @@ class AdminProductModel
             ->getResult();
     }
 
+    public function get_products_sold()
+    {
+        return $this->db->table('products')
+            ->selectSum('total_units_sold')
+            ->get()
+            ->getRow()
+            ->total_units_sold;
+    }
+
+    public function low_stock_products()
+    {
+        return $this->db->table('products')
+            ->select('name,
+                            stock_quantity,
+                            slug,
+                            total_units_sold')
+            ->where('stock_quantity < ', 50)
+            ->get()
+            ->getResult();
+    }
+
+    public function trending_products()
+    {
+        return $this->db->table('products')
+            ->select('name, 
+                            stock_quantity, 
+                            slug, 
+                            (total_units_sold * coalesce(nullif(promo, 0), price)) as total_sales, 
+                            total_units_sold,
+                            sku')
+            ->where('total_units_sold >', 1)
+            ->get()
+            ->getResult();
+    }
+
     public function save_combinations($combinations, $product_id, $files)
     {
         foreach ($combinations as $comb_name_index => $combination) {
