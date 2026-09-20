@@ -349,9 +349,10 @@ class AdminProductModel
         return true;
     }
 
-    public function get_all_products()
+    public function get_all_products($page = 1, $products_count_per_page = 2)
     {
-        return $this->db->table('products p')
+        $offset = ($page - 1) * $products_count_per_page;
+        $builder = $this->db->table('products p')
             ->select('p.id, 
                             p.name, 
                             p.price, 
@@ -363,9 +364,18 @@ class AdminProductModel
                             p.total_units_sold,
                             avg(r.rating) avg_rating')
             ->join('reviews r', 'r.product_id = p.id', 'left')
-            ->groupBy('p.id')
-            ->get()
-            ->getResult();
+            ->groupBy('p.id');
+
+        $total_count = $builder->countAllResults(false);
+
+        $products = $builder
+            ->limit($products_count_per_page, $offset)
+            ->get()->getResult();
+
+        return [
+            'products' => $products,
+            'total_products' => $total_count
+        ];
     }
 
     public function change_product_status($product_id)

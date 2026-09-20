@@ -137,69 +137,65 @@ $('#products-selector').select2({
 $(document).ready(function () {
     const tables = {
         productsTable : "products",
-        categoriesTable: "categories"
+        ordersTable: "orders"
     };
 
     Object.entries(tables).forEach(([tableId, name]) => {
         $('#' + tableId).DataTable({
             responsive: true,
             pageLength: 15,
-
+            paging: false,
             lengthMenu: [
                 [15, 25, 50, 100, -1],
                 [15, 25, 50, 100, "All"]
             ],
-
             order: [
                 [0, 'asc']
             ],
-
-            columnDefs: tableId === 'productsTable'
-                ? [
-                    {
-                        orderable: false,
-                        targets: [8]
-                    }
-                ]
-                : [],
-
             language: {
                 search: "_INPUT_",
                 searchPlaceholder: `Search ${name}...`,
                 lengthMenu: "Show _MENU_ entries",
-                info: `Showing _START_ to _END_ of _TOTAL_ ${name}`,
+                info: ``,
                 infoEmpty: `No ${name} found`,
                 infoFiltered: "(filtered from _MAX_ total)",
-                zeroRecords: `No matching ${name} found`,
-                paginate: {
-                    first: "«",
-                    last: "»",
-                    next: "›",
-                    previous: "‹"
-                }
+                zeroRecords: `No matching ${name} found`
             }
         });
     });
 
-    $('#ordersTable').DataTable({
+    $('#categoriesTable').DataTable({
         responsive: true,
         pageLength: 15,
-        paging: false,
+
         lengthMenu: [
             [15, 25, 50, 100, -1],
             [15, 25, 50, 100, "All"]
         ],
+
         order: [
             [0, 'asc']
         ],
+        columnDefs: [
+            {
+                orderable: false,
+                targets: [5]
+            }
+        ],
         language: {
             search: "_INPUT_",
-            searchPlaceholder: `Search orders...`,
+            searchPlaceholder: `Search categories...`,
             lengthMenu: "Show _MENU_ entries",
-            info: ``,
-            infoEmpty: `No orders found`,
+            info: `Showing _START_ to _END_ of _TOTAL_ categories`,
+            infoEmpty: `No categories found`,
             infoFiltered: "(filtered from _MAX_ total)",
-            zeroRecords: `No matching orders found`
+            zeroRecords: `No matching categories found`,
+            paginate: {
+                first: "«",
+                last: "»",
+                next: "›",
+                previous: "‹"
+            }
         }
     });
 });

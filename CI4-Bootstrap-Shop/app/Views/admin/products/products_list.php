@@ -44,6 +44,35 @@
             ?>
             </tbody>
         </table>
+        <?php
+        if ($total_pages > 1) {
+            $visible_pages = 5;
+            $start_page = max(1, $current_page - 2);
+            $end_page = min($total_pages, $start_page + $visible_pages - 1);
+
+            if (($end_page - $start_page + 1) < $visible_pages) {
+                $start_page = max(1, $end_page - $visible_pages + 1);
+            }
+            ?>
+            <div class="row mb-2">
+                <div class="col-12 text-end">
+                    <a class="btn" href="<?= base_url('/products-list') . '?page=1' ?>">«</a>
+                    <a class="btn" href="<?= base_url('/products-list') . '?page=' . max(1, $current_page - 1)?>">‹</a>
+                    <?php
+                    for ($i = $start_page; $i <= $end_page; $i++) {
+                        ?>
+                        <a class="btn"
+                           href="<?= base_url('/products-list') . '?page=' . $i?>"><?= $i ?></a>
+                        <?php
+                    }
+                    ?>
+                    <a class="btn" href="<?= base_url('/products-list') . '?page=' . min($total_pages, $current_page + 1) ?>">›</a>
+                    <a class="btn" href="<?= base_url('/products-list') . '?page=' . $total_pages ?>">»</a>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
     </div>
 </div>
 <!-- PRODUCTS LIST END -->

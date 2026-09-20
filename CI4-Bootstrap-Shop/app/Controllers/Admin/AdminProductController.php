@@ -556,11 +556,17 @@ class AdminProductController extends BaseController
 
     public function products_list()
     {
-        $products = $this->admin_product_model->get_all_products();
+        $products_count_per_page = 15;
+        $page = $this->request->getGet('page') ?? 1;
+        $response_data = $this->admin_product_model->get_all_products($page, $products_count_per_page);
 
-        if ($products) {
-            $this->data['products'] = $products;
-        }
+        $this->data += [
+            'products'  => $response_data['products'],
+            'total_products' => $response_data['total_products'],
+            'total_pages' => ceil($response_data['total_products'] / $products_count_per_page),
+            'current_page' => $page,
+            'per_page' => $products_count_per_page
+        ];
 
         return view('admin/templates/meta', $this->data)
             . view('admin/templates/header', $this->data)
