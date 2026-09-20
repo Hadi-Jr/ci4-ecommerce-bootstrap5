@@ -114,7 +114,7 @@
                     <form class="d-flex d-none d-lg-block" role="search">
                         <div class="input-group">
                             <input type="text" class="form-control rounded-start-5" placeholder="Search" aria-label="Search">
-                            <button class="input-group-text rounded-end-5 green-btn" type="submit">
+                            <button class="input-group-text rounded-end-5 green-btn search-btn" type="submit">
                                 <i class="fa-solid fa-magnifying-glass icon-teal"></i>
                             </button>
                         </div>
@@ -168,7 +168,7 @@
         <form class="collapse" id="search-field" role="search">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search" aria-label="Search">
-                <button class="btn green-btn" type="submit" aria-label="Search">
+                <button class="btn green-btn search-btn" type="submit" aria-label="Search">
                     <i class="fa-solid fa-magnifying-glass icon-white"></i>
                 </button>
             </div>
@@ -189,6 +189,19 @@
     </div>
 </header>
 <!-- HEADER END -->
+
+<script>
+    $('.search-btn').on('click', function (e) {
+        e.preventDefault();
+        let search_value = $(this).siblings('input').val().trim();
+
+        if (!search_value) {
+            return;
+        }
+
+        window.location.href = '<?= base_url('/search') ?>' + '?query=' + encodeURIComponent(search_value);
+    });
+</script>
 
 <!-- BODY START -->
 <main class="container mb-5 my-md-4">

@@ -327,4 +327,26 @@ class ProductModel
             'total' => $total
         ];
     }
+
+    public function search_products($search_query)
+    {
+        return $this->db->table('products p')
+            ->select('p.id, 
+                            p.name, 
+                            p.price, 
+                            p.promo, 
+                            p.slug, 
+                            i.image_url')
+            ->join('categories c', 'c.id = p.category_id')
+            ->join('images i', 'i.product_id = p.id')
+            ->where('p.status', 1)
+            ->like('i.image_url', 'main-image')
+            ->groupStart()
+                ->like('p.name', $search_query)
+                ->orLike('p.sku', $search_query)
+                ->orLike('p.barcode', $search_query)
+            ->groupEnd()
+            ->get()
+            ->getResult();
+    }
 }

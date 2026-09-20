@@ -11,6 +11,9 @@ $routes->add('/register', 'UserController::register', ['filter' => 'guest']);
 $routes->add('/login', 'UserController::login', ['filter' => 'guest']);
 $routes->add('/logout', 'UserController::logout');
 
+// Search
+$routes->add('/search', 'Home::search');
+
 // Categories
 $routes->add('/category/(:any)', 'CategoryController::view/$1');
 
@@ -63,8 +66,10 @@ $routes->add('/edit-category-view/(:any)', 'Admin\AdminCategoryController::edit_
 $routes->add('/edit-category', 'Admin\AdminCategoryController::edit_category', ['filter' => 'admin']);
 $routes->add('/add-category', 'Admin\AdminCategoryController::add_category', ['filter' => 'admin']);
 
-
 // Orders
 $routes->add('/admin/orders-list', 'Admin\AdminOrdersController::view', ['filter' => 'admin']);
 $routes->add('/change-order-status', 'Admin\AdminOrdersController::change_status', ['filter' => 'admin']);
+
+
+
 
