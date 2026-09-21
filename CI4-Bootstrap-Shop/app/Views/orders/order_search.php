@@ -36,7 +36,7 @@ foreach ($orders as $order_id => $order) {
                             </span>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 mt-2 mt-md-0 text-md-end">
+                <div class="col-12 col-md-4 mt-2 mt-md-0 text-start text-md-end">
                     <span class="fw-bold fs-5">€<?= $order['order_data']['total_amount'] ?></span>
                     <span class="text-secondary small d-block d-md-inline ms-md-2">Total</span>
                 </div>
@@ -70,7 +70,7 @@ foreach ($orders as $order_id => $order) {
                         <span class="text-secondary small ms-2"><?= count($order['product_data']) - 2 ?> more items</span>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 mt-2 mt-md-0 text-md-end">
+                <div class="col-12 col-md-4 mt-2 mt-md-0 text-start text-md-end">
                     <span class="badge bg-light text-secondary rounded px-3 py-2">Free Shipping</span>
                 </div>
             </div>
@@ -94,6 +94,5 @@ foreach ($orders as $order_id => $order) {
         </div>
     </div>
     <?php
-
 }
 ?>

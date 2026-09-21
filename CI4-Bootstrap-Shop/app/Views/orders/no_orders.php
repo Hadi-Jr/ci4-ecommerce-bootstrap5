@@ -16,7 +16,7 @@
         </div>
     </div>
 </div>
-<div class="d-none text-center py-5 mt-5 orders-page"></div>
+<div class="d-none text-center mt-3 mt-lg-5 orders-page"></div>
 
 <script>
     $('#track').on('input', function () {
