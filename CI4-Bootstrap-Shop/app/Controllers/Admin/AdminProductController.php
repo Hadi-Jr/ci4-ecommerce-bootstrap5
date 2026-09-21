@@ -248,6 +248,13 @@ class AdminProductController extends BaseController
     {
         $product = $this->admin_product_model->get_product($product_id);
 
+        if (!$product) {
+            return view('admin/templates/meta', $this->data)
+                . view('admin/templates/header', $this->data)
+                . view('404_page')
+                . view('admin/templates/footer', $this->data);
+        }
+
         $this->data['product'] = $product;
 
         return view('admin/templates/meta', $this->data)

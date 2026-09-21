@@ -186,7 +186,8 @@
                 title: 'Order Details',
                 html: response,
                 width: 1000,
-                showCloseButton: true
+                showCloseButton: true,
+                showConfirmButton: false
             });
         });
     });

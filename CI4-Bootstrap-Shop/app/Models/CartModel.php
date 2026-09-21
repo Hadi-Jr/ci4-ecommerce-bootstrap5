@@ -70,7 +70,8 @@ class CartModel
             ->join('cart_item ci', 'ci.cart_id = c.id')
             ->join('products p', 'ci.product_id = p.id')
             ->join('product_combination_value pcv', 'ci.comb_value_id = pcv.id', 'left')
-            ->join('images im', "p.id = im.product_id AND im.image_url LIKE '%\main-image.%'")
+            ->join('images im', 'p.id = im.product_id')
+            ->like('im.image_url', 'main-image')
             ->where('c.status', 1);
 
         if ($user_id !== null) {
@@ -124,7 +125,8 @@ class CartModel
                               im.image_url as main_image')
             ->join('products p', 'ci.product_id = p.id')
             ->join('product_combination_value pcv', 'ci.comb_value_id = pcv.id', 'left')
-            ->join('images im', "p.id = im.product_id AND im.image_url LIKE '%\main-image.%'")
+            ->join('images im', 'p.id = im.product_id')
+            ->like('im.image_url', 'main-image')
             ->where('ci.cart_id', $cart_id)
             ->get()
             ->getResult();

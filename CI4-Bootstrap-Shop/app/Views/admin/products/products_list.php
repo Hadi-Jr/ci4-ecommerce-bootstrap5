@@ -135,7 +135,13 @@
                 title: 'Product Details',
                 html: response,
                 width: 1000,
-                showCloseButton: true
+                showCloseButton: true,
+                showConfirmButton: true,
+                confirmButtonText: 'Edit Product'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `http://localhost:8080/edit-product-view/${product_id}`;
+                }
             });
         });
     });

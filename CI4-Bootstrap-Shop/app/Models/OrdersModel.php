@@ -117,7 +117,8 @@ class OrdersModel
                               i.image_url as main_image')
             ->join('cart_item ci', 'ci.cart_id = o.cart_id')
             ->join('products p', 'ci.product_id = p.id')
-            ->join('images i', "i.product_id = p.id and i.image_url like '%main-image.%'");
+            ->join('images i', 'i.product_id = p.id')
+            ->like('i.image_url', 'main-image');
 
         if ($tracking_number !== null) {
             $builder->where('tracking_number', $tracking_number);
@@ -239,8 +240,9 @@ class OrdersModel
                               sa.city')
             ->join('cart_item ci', 'ci.cart_id = o.cart_id')
             ->join('products p', 'ci.product_id = p.id')
-            ->join('images i', "i.product_id = p.id and i.image_url like '%main-image.%'")
-            ->join('shipping_address sa', 'sa.order_id = o.id');
+            ->join('images i', 'i.product_id = p.id')
+            ->join('shipping_address sa', 'sa.order_id = o.id')
+            ->like('i.image_url', 'main-image');
 
         if ($tracking_number !== null) {
             $builder->where('o.tracking_number', $tracking_number);
