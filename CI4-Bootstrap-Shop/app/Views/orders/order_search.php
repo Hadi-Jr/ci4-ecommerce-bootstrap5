@@ -64,7 +64,7 @@ foreach ($orders as $order_id => $order) {
                         ?>
                         <div class="border rounded d-flex align-items-center justify-content-center
                                     bg-light order-image-border">
-                            <a href="<?= base_url('/order-details/' . $order_id) ?>"
+                            <a href="<?= base_url('/order-details-track-nr/' . $tracking_number) ?>"
                                class="text-secondary fw-bold small">+<?= count($order['product_data']) - 2 ?></a>
                         </div>
                         <span class="text-secondary small ms-2"><?= count($order['product_data']) - 2 ?> more items</span>

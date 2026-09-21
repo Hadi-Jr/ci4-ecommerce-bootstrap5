@@ -60,6 +60,12 @@ class AdminOrdersController extends BaseController
     public function order_details($order_id)
     {
         $order_details = $this->admin_orders_model->get_order_details($order_id);
+        if (!$order_details) {
+            return view('admin/templates/meta', $this->data)
+                . view('admin/templates/header', $this->data)
+                . view('404_page')
+                . view('admin/templates/footer', $this->data);
+        }
 
         $response_data = [
             'shipping_address' => $order_details['shipping_address'],

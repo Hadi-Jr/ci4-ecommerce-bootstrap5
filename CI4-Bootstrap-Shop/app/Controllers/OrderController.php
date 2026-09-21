@@ -45,7 +45,10 @@ class OrderController extends BaseController
         $order = $this->orders_model->check_order($session_id, $user_id, $order_id);
 
         if (!$order) {
-            throw PageNotFoundException::forPageNotFound();
+            return view('templates/meta', $this->data)
+                . view('templates/header')
+                . view('404_page')
+                . view('templates/footer');
         }
 
         $this->data['order_id'] = $order_id;
@@ -181,6 +184,13 @@ class OrderController extends BaseController
 
         $order_details = $this->orders_model->get_order_details($session_id, $user_id, order_id: $order_id);
 
+        if (!$order_details) {
+            return view('templates/meta', $this->data)
+                . view('templates/header')
+                . view('404_page')
+                . view('templates/footer');
+        }
+
         $this->data['order_details'] = $order_details;
 
         return view('templates/meta', $this->data)
@@ -192,6 +202,12 @@ class OrderController extends BaseController
     public function order_details_by_tracking_nr($tracking_number)
     {
         $order_details = $this->orders_model->get_order_details(tracking_number: $tracking_number);
+        if (!$order_details) {
+            return view('templates/meta', $this->data)
+                . view('templates/header')
+                . view('404_page')
+                . view('templates/footer');
+        }
 
         $this->data['order_details'] = $order_details;
 

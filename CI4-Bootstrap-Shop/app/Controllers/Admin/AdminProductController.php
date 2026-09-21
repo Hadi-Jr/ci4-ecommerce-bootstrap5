@@ -590,7 +590,10 @@ class AdminProductController extends BaseController
         $product_details = $this->admin_product_model->get_product_details($product_id);
 
         if (!$product_details) {
-            //
+            return view('admin/templates/meta', $this->data)
+                    . view('admin/templates/header', $this->data)
+                    . view('404_page')
+                    . view('admin/templates/footer', $this->data);
         }
 
         $this->data += [

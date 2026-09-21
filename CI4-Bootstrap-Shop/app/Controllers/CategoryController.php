@@ -36,6 +36,13 @@ class CategoryController extends BaseController
         }
 
         $category = $this->category_model->get_category($slug);
+        if (!$category) {
+            return view('templates/meta', $this->data)
+                . view('templates/header')
+                . view('404_page')
+                . view('templates/footer');
+        }
+
         $result = $this->category_model->get_category_products($slug, $sort, $page, $selected_filters,
             $products_count_per_page);
         $category_banners = $this->category_model->get_category_banners($slug);
