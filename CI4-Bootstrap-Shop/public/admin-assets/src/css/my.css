@@ -21,3 +21,7 @@
 .admin-order-details-table {
     table-layout: fixed;
 }
+
+.admin-product-details-table th, td, tr {
+    font-size: 14px;
+}

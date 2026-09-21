@@ -27,6 +27,13 @@ class ProductController extends BaseController
 
         $product_details = $this->product_model->get_product_details($slug);
 
+        if (!$product_details) {
+            return view('templates/meta', $this->data)
+                . view('templates/header')
+                . view('404_page')
+                . view('templates/footer');
+        }
+
         $this->data += [
             'product' => $product_details['product'],
             'images' => $product_details['images'],

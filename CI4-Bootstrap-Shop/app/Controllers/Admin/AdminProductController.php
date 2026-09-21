@@ -584,4 +584,20 @@ class AdminProductController extends BaseController
             'status' => 'success',
         ]);
     }
+
+    public function product_details($product_id)
+    {
+        $product_details = $this->admin_product_model->get_product_details($product_id);
+
+        if (!$product_details) {
+            //
+        }
+
+        $this->data += [
+            'product_data' => $product_details['product_data'],
+            'features' => $product_details['features']
+        ];
+
+        return view('/admin/products/product_details', $this->data);
+    }
 }

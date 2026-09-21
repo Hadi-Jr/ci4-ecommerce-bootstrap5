@@ -6,7 +6,7 @@
         <table id="productsTable" class="table">
             <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">Details</th>
                 <th scope="col">Product Name</th>
                 <th scope="col">SKU</th>
                 <th scope="col">Price</th>
@@ -22,7 +22,11 @@
             foreach ($products as $product) {
                 ?>
                 <tr>
-                    <td><?= $product->id ?></td>
+                    <td>
+                        <button data-id="<?= $product->id ?>" class="btn btn-primary btn-sm view-product-btn">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </td>
                     <td><a href="<?= base_url('/product/' . $product->slug) ?>"><?= $product->name ?></a></td>
                     <td><?= $product->sku?></td>
                     <td class="text-center">€<?= $product->price?></td>
@@ -116,6 +120,23 @@
                     }
                 });
             }
+        });
+    });
+
+    $('.view-product-btn').on('click', function (e) {
+        e.preventDefault();
+        const product_id = $(this).data('id');
+
+        $.ajax({
+            url: '<?= base_url('/admin/product_details/') ?>' + product_id,
+            method: 'GET',
+        }).done(function (response) {
+            Swal.fire({
+                title: 'Product Details',
+                html: response,
+                width: 1000,
+                showCloseButton: true
+            });
         });
     });
 </script>

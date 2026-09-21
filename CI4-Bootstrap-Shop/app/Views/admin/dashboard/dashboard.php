@@ -158,9 +158,9 @@
                     ?>
                     <tr>
                         <td>
-                            <a href="<?= base_url('/product/' . $trending_product->slug) ?>">
-                                <i class="fa-solid fa-link"></i>
-                            </a>
+                            <button data-id="<?= $trending_product->id ?>" class="btn btn-primary btn-sm view-product-btn">
+                                <i class="fas fa-eye"></i>
+                            </button>
                         </td>
                         <td>
                             <div class="line-clamp-2">
@@ -211,9 +211,9 @@
                             ?>
                             <tr>
                                 <td>
-                                    <a href="<?= base_url('/product/' . $product->slug) ?>">
-                                        <i class="fa-solid fa-link"></i>
-                                    </a>
+                                    <button data-id="<?= $product->id ?>" class="btn btn-primary btn-sm view-product-btn">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
                                 </td>
                                 <td><?= $product->name ?></td>
                                 <td><?= $product->stock_quantity ?></td>
@@ -288,6 +288,23 @@
         }).done(function (response) {
             Swal.fire({
                 title: 'Order Details',
+                html: response,
+                width: 1000,
+                showCloseButton: true
+            });
+        });
+    });
+
+    $('.view-product-btn').on('click', function (e) {
+        e.preventDefault();
+        const product_id = $(this).data('id');
+
+        $.ajax({
+            url: '<?= base_url('/admin/product_details/') ?>' + product_id,
+            method: 'GET',
+        }).done(function (response) {
+            Swal.fire({
+                title: 'Product Details',
                 html: response,
                 width: 1000,
                 showCloseButton: true

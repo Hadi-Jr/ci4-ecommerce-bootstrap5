@@ -131,7 +131,8 @@ class AdminProductModel
     public function low_stock_products()
     {
         return $this->db->table('products')
-            ->select('name,
+            ->select('id,
+                            name,
                             stock_quantity,
                             slug,
                             total_units_sold,
@@ -144,7 +145,8 @@ class AdminProductModel
     public function trending_products()
     {
         return $this->db->table('products')
-            ->select('name, 
+            ->select('id,
+                            name, 
                             stock_quantity, 
                             slug, 
                             (total_units_sold * coalesce(nullif(promo, 0), price)) as total_sales, 
@@ -776,6 +778,59 @@ class AdminProductModel
             ->update([
                 'is_active' => 0
             ]);
+    }
+
+    public function get_product_details($product_id)
+    {
+        $sub_query = $this->db->table('reviews r')
+            ->select('avg(r.rating) as avg_rating')
+            ->where('r.product_id', $product_id)
+            ->getCompiledSelect();
+
+        $result = $this->db->table('products p')
+            ->select("
+                    p.*,
+                    im.image_url,
+                    f.key,
+                    f.value,
+                    COALESCE(($sub_query), 0) AS avg_rating", false)
+            ->join('images im', 'im.product_id = p.id')
+            ->join('features f', 'f.product_id = p.id')
+            ->like('im.image_url', 'main-image')
+            ->where('p.id', $product_id)
+            ->get()
+            ->getResult();
+
+        if (!$result) {
+            return false;
+        }
+
+        $product_details_map = [];
+        foreach ($result as $r) {
+            if (!isset($product_details_map['product_data'])) {
+                $product_details_map['product_data'] = [
+                    'product_id'        => $r->id,
+                    'name'              => $r->name,
+                    'price'             => $r->price,
+                    'promo'             => $r->promo,
+                    'stock_quantity'    => $r->stock_quantity,
+                    'sku'               => $r->sku,
+                    'barcode'           => $r->barcode,
+                    'status'            => $r->status,
+                    'brand'             => $r->brand,
+                    'slug'              => $r->slug,
+                    'image'             => $r->image_url,
+                    'avg_rating'        => $r->avg_rating
+                ];
+            }
+
+            $product_details_map['features'][$r->key] = $r->value;
+        }
+
+        return [
+            'product_data' => $product_details_map['product_data'],
+            'features' => $product_details_map['features'],
+        ];
     }
 
 }

@@ -92,13 +92,15 @@ class AdminOrderModel extends BaseController
 
         $details_map = [];
         foreach ($data as $datum) {
-            $details_map['shipping_address'] = [
-                'city'      => $datum->city,
-                'zip_code'  => $datum->zip_code,
-                'state'     => $datum->state,
-                'country'   => $datum->country,
-                'street'    => $datum->street
-            ];
+            if (!isset($details_map['shipping_address'])) {
+                $details_map['shipping_address'] = [
+                    'city'      => $datum->city,
+                    'zip_code'  => $datum->zip_code,
+                    'state'     => $datum->state,
+                    'country'   => $datum->country,
+                    'street'    => $datum->street
+                ];
+            }
 
             $details_map['products'][$datum->product_id] = [
                 'slug'          => $datum->slug,
