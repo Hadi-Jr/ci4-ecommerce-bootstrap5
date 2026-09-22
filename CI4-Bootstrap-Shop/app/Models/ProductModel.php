@@ -349,4 +349,23 @@ class ProductModel
             ->get()
             ->getResult();
     }
+
+    public function trending_products()
+    {
+        return $this->db->table('products p')
+            ->select('p.id, 
+                            p.name, 
+                            p.slug,
+                            p.price,
+                            p.promo,
+                            p.stock_quantity,
+                            i.image_url')
+            ->join('images i', 'i.product_id = p.id')
+            ->where('status', 1)
+            ->where('total_units_sold >=', 0) //temporary zero for testing
+            ->like('i.image_url', 'main-image')
+            ->limit(10)
+            ->get()
+            ->getResult();
+    }
 }

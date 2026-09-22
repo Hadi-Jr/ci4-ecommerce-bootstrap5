@@ -157,4 +157,20 @@ class CategoryModel
 
         return $attr_map;
     }
+
+    public function get_popular_categories()
+    {
+        return $this->db->table('categories c')
+            ->select('c.name as cat_name,
+                            c.slug as cat_slug,
+                            count(p.id) as product_count,
+                            sum(p.total_units_sold) as total_units_sold')
+            ->join('products p', 'p.category_id = c.id', 'left')
+            ->where('c.parent_id is not null')
+            ->where('is_active', 1)
+            ->groupBy('c.id')
+            ->having('total_units_sold >=', 0) // temporary 0 for testing purposes
+            ->get()
+            ->getResult();
+    }
 }
