@@ -47,8 +47,11 @@
                                                 <div class="card-body">
                                                     <p class="card-title fw-semibold mb-3 text-center comb-value"></p>
 
-                                                    <input type="file" class="form-control mb-4 comb-image"
-                                                           accept="image/*">
+                                                    <div class="mb-2">
+                                                        <input type="file" class="form-control comb-image"
+                                                               accept="image/*">
+                                                        <small class="text-muted">1:1 aspect ratio image</small>
+                                                    </div>
 
                                                     <input type="text" class="form-control mb-2 comb-value-title" placeholder="Title"
                                                            required>
@@ -125,8 +128,11 @@
                         <div class="card-body">
                             <p class="card-title fw-semibold mb-3 text-center comb-value"></p>
 
-                            <input type="file" class="form-control mb-4 comb-image"
-                                   accept="image/*">
+                            <div class="mb-2">
+                                <input type="file" class="form-control comb-image"
+                                       accept="image/*">
+                                <small class="text-muted">1:1 aspect ratio image</small>
+                            </div>
 
                             <input type="text" class="form-control mb-2 comb-value-title" placeholder="Title"
                                    required>
@@ -165,8 +171,11 @@
             <div class="card-body">
                 <p class="card-title fw-semibold mb-3 text-center comb-value"></p>
 
-                <input type="file" class="form-control mb-4 comb-image"
-                       accept="image/*">
+                <div class="mb-2">
+                    <input type="file" class="form-control comb-image"
+                           accept="image/*">
+                    <small class="text-muted">1:1 aspect ratio image</small>
+                </div>
 
                 <input type="text" class="form-control mb-2 comb-value-title" placeholder="Title"
                        required>

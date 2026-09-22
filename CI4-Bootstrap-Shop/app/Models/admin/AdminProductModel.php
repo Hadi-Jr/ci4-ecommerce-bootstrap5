@@ -351,7 +351,14 @@ class AdminProductModel
         return true;
     }
 
-    public function get_all_products($page = 1, $products_count_per_page = 2)
+    public function get_all_products()
+    {
+        return $this->db->table('products')
+            ->get()
+            ->getResult();
+    }
+
+    public function get_all_products_per_page($page = 1, $products_count_per_page = 2)
     {
         $offset = ($page - 1) * $products_count_per_page;
         $builder = $this->db->table('products p')

@@ -565,7 +565,7 @@ class AdminProductController extends BaseController
     {
         $products_count_per_page = 15;
         $page = $this->request->getGet('page') ?? 1;
-        $response_data = $this->admin_product_model->get_all_products($page, $products_count_per_page);
+        $response_data = $this->admin_product_model->get_all_products_per_page($page, $products_count_per_page);
 
         $this->data += [
             'products'  => $response_data['products'],
