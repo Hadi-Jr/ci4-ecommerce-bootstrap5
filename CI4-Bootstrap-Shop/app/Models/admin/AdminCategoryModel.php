@@ -209,7 +209,6 @@ class AdminCategoryModel
 
         if (!$this->save_banners($folder_path, $new_cat_id, $files)) {
             delete_directory($folder_path);
-            return false;
         }
 
         $this->db->transComplete();
@@ -218,17 +217,11 @@ class AdminCategoryModel
 
     public function save_banners($folder_path, $category_id, $files)
     {
+        $uploaded = false;
         if (!empty($files['images'])) {
             $img_counter = 1;
 
             foreach ($files['images'] as $image) {
-
-                log_message('error', '--- Banner debug ---');
-                log_message('error', 'Name: ' . $image->getName());
-                log_message('error', 'Error code: ' . $image->getError());
-                log_message('error', 'Error string: ' . $image->getErrorString());
-                log_message('error', 'Valid: ' . ($image->isValid() ? 'YES' : 'NO'));
-                log_message('error', 'Moved: ' . ($image->hasMoved() ? 'YES' : 'NO'));
 
                 if ($image->getError() === UPLOAD_ERR_NO_FILE) {
                     continue;
@@ -244,9 +237,7 @@ class AdminCategoryModel
                     }
 
                     $image_data = [
-                        'image_url' => '/assets/images/categories/banners/'
-                            . $category_id . '/'
-                            . $filename,
+                        'image_url' => '/assets/images/categories/banners/' . $category_id . '/' . $filename,
                         'category_id' => $category_id
                     ];
 
@@ -255,8 +246,8 @@ class AdminCategoryModel
                         return false;
                     }
 
+                    $uploaded = true;
                     $img_counter++;
-
                 } else {
                     log_message('error', 'Invalid banner');
                     return false;
@@ -264,6 +255,6 @@ class AdminCategoryModel
             }
         }
 
-        return true;
+        return $uploaded;
     }
 }
