@@ -142,7 +142,6 @@ $(document).ready(function () {
 
     Object.entries(tables).forEach(([tableId, name]) => {
         $('#' + tableId).DataTable({
-            responsive: true,
             pageLength: 15,
             paging: false,
             lengthMenu: [

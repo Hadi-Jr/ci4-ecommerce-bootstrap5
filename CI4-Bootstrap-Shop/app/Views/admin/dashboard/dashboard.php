@@ -111,7 +111,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="card">
+                    <div class="card table-responsive">
                         <div class="card-body" >
                             <div class="row" >
                                 <div class="col mt-0" >
@@ -137,7 +137,7 @@
     </div>
 
     <div class="col-xl-6 d-flex">
-        <div class="card flex-fill">
+        <div class="card flex-fill table-responsive">
             <div class="card-header">
                 <h5 class="card-title mb-0">Trending Products</h5>
             </div>
@@ -229,7 +229,7 @@
         </div>
     </div>
     <div class="col-xl-6 d-flex">
-        <div class="card flex-fill">
+        <div class="card flex-fill table-responsive">
             <div class="card-header">
                 <h5 class="card-title mb-0">Recent Orders</h5>
             </div>
