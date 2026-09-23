@@ -168,7 +168,7 @@ class AdminCategoryModel
             ->updateBatch($data, 'id');
     }
 
-    public function add_category($post_data)
+    public function add_category($post_data, $files)
     {
         $this->db->transStart();
 
@@ -199,8 +199,71 @@ class AdminCategoryModel
                 'parent_id' => $parent_id,
                 'slug' => $new_cat_slug
             ]);
+        $new_cat_id = $this->db->insertID();
+
+        // save category banners
+        $folder_path = FCPATH . '/assets/images/categories/banners/' . $new_cat_id . '/';
+        if (!is_dir($folder_path)) {
+            mkdir($folder_path, 0777, true);
+        }
+
+        if (!$this->save_banners($folder_path, $new_cat_id, $files)) {
+            delete_directory($folder_path);
+            return false;
+        }
 
         $this->db->transComplete();
         return $this->db->transStatus();
+    }
+
+    public function save_banners($folder_path, $category_id, $files)
+    {
+        if (!empty($files['images'])) {
+            $img_counter = 1;
+
+            foreach ($files['images'] as $image) {
+
+                log_message('error', '--- Banner debug ---');
+                log_message('error', 'Name: ' . $image->getName());
+                log_message('error', 'Error code: ' . $image->getError());
+                log_message('error', 'Error string: ' . $image->getErrorString());
+                log_message('error', 'Valid: ' . ($image->isValid() ? 'YES' : 'NO'));
+                log_message('error', 'Moved: ' . ($image->hasMoved() ? 'YES' : 'NO'));
+
+                if ($image->getError() === UPLOAD_ERR_NO_FILE) {
+                    continue;
+                }
+
+                if ($image->isValid() && !$image->hasMoved()) {
+
+                    $filename = 'banner' . $img_counter . '.' . $image->getExtension();
+
+                    if (!$image->move($folder_path, $filename)) {
+                        log_message('error', 'Could not move banner: ' . $filename);
+                        return false;
+                    }
+
+                    $image_data = [
+                        'image_url' => '/assets/images/categories/banners/'
+                            . $category_id . '/'
+                            . $filename,
+                        'category_id' => $category_id
+                    ];
+
+                    if (!$this->db->table('category_image')->insert($image_data)) {
+                        log_message('error', 'Error saving banner');
+                        return false;
+                    }
+
+                    $img_counter++;
+
+                } else {
+                    log_message('error', 'Invalid banner');
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

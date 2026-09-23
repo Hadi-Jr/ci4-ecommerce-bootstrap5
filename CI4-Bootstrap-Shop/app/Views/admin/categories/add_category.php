@@ -71,6 +71,22 @@
                     </div>
                 </div>
 
+                <div class="row mb-4">
+                    <div class="col-12 col-md-6 mb-3">
+                        <label for="slug" class="form-label fw-bold">Slug</label>
+                        <input type="text" class="form-control" id="category_slug" name="slug" readonly>
+                        <small class="text-muted">Auto-generated from category name</small>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <label for="images" class="form-label fw-bold">Additional Images</label>
+                        <input type="file" class="form-control" id="images" name="images[]"
+                               multiple accept="image/jpeg,image/png,image/webp">
+                        <div class="invalid-feedback"></div>
+                        <small class="text-muted">1280×330 image size</small>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-12 col-md-6 mb-3">
                         <label for="parent_id" class="form-label fw-bold">Parent Id</label>
@@ -86,15 +102,6 @@
                                placeholder="-" readonly>
                         <small class="text-muted">Auto-generated from parent category</small>
 
-                        <div class="invalid-feedback"></div>
-                    </div>
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <label for="slug" class="form-label fw-bold">Slug</label>
-                        <input type="text" class="form-control" id="category_slug" name="slug" readonly>
-                        <small class="text-muted">Auto-generated from category name</small>
                         <div class="invalid-feedback"></div>
                     </div>
                 </div>
@@ -127,14 +134,15 @@
 
     $('#add-category-btn').on('click', function (e) {
         e.preventDefault();
-
-        const post_data = $('#add-category-form').serializeArray();
+        const post_data = new FormData($('#add-category-form')[0]);
 
         $.ajax({
             url: '<?= base_url('/add-category') ?>',
             method: 'post',
             data: post_data,
-            dataType: 'json'
+            dataType: 'json',
+            contentType: false,
+            processData: false
         }).done(function (response) {
             if (response.status === 'success') {
                 Swal.fire({
@@ -172,6 +180,6 @@
                 `);
 
             $('#add-attr-btn').prop('disabled', true);
-        });;
+        });
     })
 </script>

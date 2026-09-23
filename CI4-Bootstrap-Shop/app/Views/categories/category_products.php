@@ -150,7 +150,7 @@ if (empty($category_products)) {
                 <?php
                 foreach ($category_banners ?? [] as $category_banner) {
                     ?>
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-<?= count($category_banners) > 1 ? '6' : '12' ?>">
                         <div class="card w-100 mt-2 mt-md-4">
                             <img class="card-img-top category-card-img" src="<?= base_url($category_banner->image_url) ?>"
                                  alt="product">

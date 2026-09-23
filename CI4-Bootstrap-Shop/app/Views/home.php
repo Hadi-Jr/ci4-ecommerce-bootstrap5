@@ -7,7 +7,7 @@
             <a href="<?= base_url('/promotions') ?>" class="swiper-slide">
                 <img src="<?= base_url('/assets/images/home/banners/banner1.jpg') ?>" class="d-block w-100" alt="...">
             </a>
-            <a href="<?= base_url('/promotions') ?>"class="swiper-slide">
+            <a href="<?= base_url('/promotions') ?>" class="swiper-slide">
                 <img src="<?= base_url('/assets/images/home/banners/banner2.jpg') ?>" class="d-block w-100" alt="...">
             </a>
         </div>
@@ -30,8 +30,8 @@
         </a>
     </div>
 
-    <div href="<?= base_url('/promotions') ?>" class="col-12 col-md-6 mt-2">
-        <a class="card">
+    <div class="col-12 col-md-6 mt-2">
+        <a href="<?= base_url('/promotions') ?>" class="card">
             <img class="card-img-top" src="<?= base_url('/assets/images/home/offers/offer2.jpg') ?>" alt="Card image cap">
         </a>
     </div>

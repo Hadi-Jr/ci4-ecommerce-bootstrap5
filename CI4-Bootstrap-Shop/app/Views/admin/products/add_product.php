@@ -433,7 +433,7 @@
     $('#add-product-btn').on('click', function (e) {
         e.preventDefault();
 
-        let product_data = new FormData($('#add-product-form')[0]);
+        const product_data = new FormData($('#add-product-form')[0]);
 
         $.ajax({
             url: '<?= base_url('/add-product') ?>',
@@ -556,6 +556,7 @@
 <script>
     $(document).ready(function () {
         calculateCombinations();
+        checkCombinations();
     });
 
     $(document).on('change', '.attribute-name', function () {

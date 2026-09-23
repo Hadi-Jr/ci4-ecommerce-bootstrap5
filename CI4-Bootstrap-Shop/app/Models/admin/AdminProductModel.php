@@ -95,7 +95,7 @@ class AdminProductModel
         }
 
         if (!$this->save_images($folder_path, $product_id, $files)) {
-            $this->delete_directory($folder_path);
+            delete_directory($folder_path);
             return false;
         }
 
@@ -193,7 +193,7 @@ class AdminProductModel
                         }
                     } else {
                         log_message('error', 'Error saving combination image, not valid or has moved');
-                        $this->delete_directory($folder_path);
+                        delete_directory($folder_path);
                         return false;
                     }
                 }
@@ -311,26 +311,6 @@ class AdminProductModel
         }
 
         return true;
-    }
-
-    private function delete_directory($path)
-    {
-        if (!is_dir($path)) {
-            return;
-        }
-
-        $files = array_diff(scandir($path), ['.', '..']);
-        foreach ($files as $file) {
-            $file_path = $path . DIRECTORY_SEPARATOR . $file;
-
-            if (is_dir($file_path)) {
-                $this->delete_directory($file_path);
-            } else {
-                unlink($file_path);
-            }
-        }
-
-        rmdir($path);
     }
 
     private function save_attributes($attributes, $product_id)
@@ -567,7 +547,7 @@ class AdminProductModel
                                 }
                             } else {
                                 log_message('error', 'Error saving combination image, not valid or has moved');
-                                $this->delete_directory($folder_path);
+                                delete_directory($folder_path);
                             }
                         }
 
@@ -605,7 +585,7 @@ class AdminProductModel
                             }
                         } else {
                             log_message('error', 'Error saving combination image, not valid or has moved');
-                            $this->delete_directory($folder_path);
+                            delete_directory($folder_path);
                         }
                     }
 

@@ -32,7 +32,6 @@ class AdminCategoryController extends BaseController
     public function add_category()
     {
         if ($this->request->getMethod() === 'POST') {
-            $post_data = $this->request->getPost();
 
             $rules = [
                 'category_name' => [
@@ -51,7 +50,10 @@ class AdminCategoryController extends BaseController
                 ]);
             }
 
-            $response = $this->admin_category_model->add_category($post_data);
+            $post_data = $this->request->getPost();
+            $files = $this->request->getFiles();
+
+            $response = $this->admin_category_model->add_category($post_data, $files);
             if (!$response) {
                 return $this->response
                     ->setStatusCode(500)->setJSON([

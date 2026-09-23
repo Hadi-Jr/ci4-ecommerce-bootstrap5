@@ -43,6 +43,7 @@ $(document).on("click", ".remove-feature", function () {
 $(document).on('click', '.remove-comb-name', function () {
     $(this).closest('.card').remove();
     calculateCombinations();
+    checkCombinations();
 });
 
 $(document).on('click', '.add-comb-value', function () {
@@ -62,6 +63,7 @@ $(document).on('click', '.removeCombValue', function () {
     }
 
     calculateCombinations();
+    checkCombinations();
 });
 
 $('#addCombination').on('click', function () {
@@ -83,6 +85,13 @@ $('.add-attribute').on('click', function () {
         $('#attributeTemplate .attr-row').clone(true)
     );
 });
+
+function checkCombinations() {
+    if ($('.combNameContainer .card').length === 0) {
+        $('.combNameContainer').html('No variants for this product');
+    }
+}
+
 function calculateCombinations() {
     $('.combNameContainer .comb-card').each(function (combNameIndex) {
         const comb_name_id = $(this).data('combn-id');

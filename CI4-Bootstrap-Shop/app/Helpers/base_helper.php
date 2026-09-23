@@ -74,18 +74,22 @@ function renderCategoriesAdmin($categories)
     }
 }
 
-//function build_category_url($slug, $page = null, $sort = null)
-//{
-//    $params = [];
-//    if ($page && $page > 1) {
-//        $params[] = 'page=' . $page;
-//    }
-//
-//    if ($sort) {
-//        $params[] = 'sort=' . $sort;
-//    }
-//
-//    return base_url('category/' . $slug . ($params ? '?' . implode('&', $params) : ''));
-//}
+function delete_directory($path)
+{
+    if (!is_dir($path)) {
+        return;
+    }
 
+    $files = array_diff(scandir($path), ['.', '..']);
+    foreach ($files as $file) {
+        $file_path = $path . DIRECTORY_SEPARATOR . $file;
 
+        if (is_dir($file_path)) {
+            delete_directory($file_path);
+        } else {
+            unlink($file_path);
+        }
+    }
+
+    rmdir($path);
+}
