@@ -87,12 +87,18 @@
                                 <?php
                             }
                             ?>
-                            <div class="border rounded d-flex align-items-center justify-content-center
+                            <?php
+                            if (count($order['product_data']) > 1) {
+                                ?>
+                                <div class="border rounded d-flex align-items-center justify-content-center
                                     bg-light order-image-border">
-                                <a href="<?= base_url('/order-details/' . $order_id) ?>"
-                                   class="text-secondary fw-bold small">+<?= count($order['product_data']) - 2 ?></a>
-                            </div>
-                            <span class="text-secondary small ms-2"><?= count($order['product_data']) - 2 ?> more items</span>
+                                    <a href="<?= base_url('/order-details-track-nr/' . $tracking_number) ?>"
+                                       class="text-secondary fw-bold small">+<?= count($order['product_data']) - 2 ?></a>
+                                </div>
+                                <span class="text-secondary small ms-2">+<?= count($order['product_data']) - 2 ?> more items</span>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="col-12 col-md-4 mt-2 mt-md-0 text-md-end">

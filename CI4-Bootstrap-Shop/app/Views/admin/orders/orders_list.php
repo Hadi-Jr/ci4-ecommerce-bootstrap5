@@ -45,7 +45,7 @@
                             $cls_status = 'warning';
                         }
                         ?>
-                        <div class="dropdown">
+                        <div class="dropdown" id="status">
                             <button style="width: 90px" class="btn btn-<?= $cls_status ?> dropdown-toggle btn-sm"
                                     type="button"
                                     data-bs-toggle="dropdown"
@@ -124,7 +124,7 @@
         });
     });
 
-    $('.dropdown-item').on('click', function (e) {
+    $('#status .dropdown-item').on('click', function (e) {
         e.preventDefault();
 
         let order_id = $(this).closest('.dropdown-menu').data('id');

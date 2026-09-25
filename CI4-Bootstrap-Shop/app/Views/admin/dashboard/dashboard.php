@@ -21,7 +21,7 @@
                             <div class="h1 mt-1 mb-3" >$<?= number_format($avg_order_value, 2) ?></div>
                             <div class="mb-0">
                                 <span class="text-success"><?=$total_orders?></span>
-                                <span class="text-muted">total orders</span>
+                                <span class="text-muted">total delivered orders</span>
                             </div>
                         </div>
                     </div>
@@ -61,8 +61,7 @@
                             </div>
                             <div class="h1 mt-1 mb-3" >$<?=$earnings ?></div>
                             <div class="mb-0">
-                                <span class="text-success">Current earnings</span>
-                                <span class="text-muted">from all orders</span>
+                                <span class="text-muted">From delivered orders</span>
                             </div>
                         </div>
                     </div>

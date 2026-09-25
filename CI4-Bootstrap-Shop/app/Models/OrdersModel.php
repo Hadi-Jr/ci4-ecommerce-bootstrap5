@@ -41,6 +41,7 @@ class OrdersModel
             'session_id' => $sessionId,
             'delivery_time' => $delivery_date,
             'order_date' => $order_date,
+            'status'    => 'pending'
         ];
 
         $order_id = $this->save_order($order_data);

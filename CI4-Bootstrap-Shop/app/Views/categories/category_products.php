@@ -268,7 +268,7 @@ if (empty($category_products)) {
                             </div>
                         </div>
                         <?php
-                    }
+                        }
                     }
                     ?>
                 </div>
