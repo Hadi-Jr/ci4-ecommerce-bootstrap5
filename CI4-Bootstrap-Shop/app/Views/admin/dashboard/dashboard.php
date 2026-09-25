@@ -21,7 +21,7 @@
                             <div class="h1 mt-1 mb-3" >$<?= number_format($avg_order_value, 2) ?></div>
                             <div class="mb-0">
                                 <span class="text-success"><?=$total_orders?></span>
-                                <span class="text-muted">total delivered orders</span>
+                                <span class="text-muted">total completed orders</span>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="h1 mt-1 mb-3" >$<?=$earnings ?></div>
                             <div class="mb-0">
-                                <span class="text-muted">From delivered orders</span>
+                                <span class="text-muted">From completed orders</span>
                             </div>
                         </div>
                     </div>
@@ -122,6 +122,47 @@
                             <div class="h1 mt-1 mb-3" ><?= $low_stock_products_count ?></div>
                             <div class="mb-0">
                                 <span class="text-muted">Below threshold of 50 units</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card table-responsive">
+                        <div class="card-body" >
+                            <div class="row" >
+                                <div class="col mt-0" >
+                                    <h5 class="card-title">Revenue per Customer</h5>
+                                </div>
+
+                                <div class="col-auto" >
+                                    <div class="stat text-primary" >
+                                        <i class="fa-solid fa-user-tag" style="font-size: 17px"></i>                                   </div>
+                                </div>
+                            </div>
+                            <div class="h1 mt-1 mb-3" >$<?= $earnings / $customers ?></div>
+                            <div class="mb-0">
+                                <span class="text-muted">Avg earnings per customer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card table-responsive">
+                        <div class="card-body" >
+                            <div class="row" >
+                                <div class="col mt-0" >
+                                    <h5 class="card-title">Total Orders</h5>
+                                </div>
+
+                                <div class="col-auto" >
+                                    <div class="stat text-primary" >
+                                        <i class="fa-solid fa-chart-line" style="font-size: 18px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h1 mt-1 mb-3" ><?= $total_orders ?></div>
+                            <div class="mb-0">
+                                <span class="text-muted">Completed orders</span>
                             </div>
                         </div>
                     </div>
