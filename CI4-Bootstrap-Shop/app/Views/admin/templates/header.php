@@ -52,14 +52,14 @@
                 </li>
 
 
-                <!-- Inventory -->
+                <!-- Products -->
                 <li class="sidebar-item parent">
-                    <a data-bs-target="#inventory" data-bs-toggle="collapse" class="sidebar-link collapsed" href="#">
+                    <a data-bs-target="#products" data-bs-toggle="collapse" class="sidebar-link collapsed" href="#">
                         <i class="align-middle" data-feather="package"></i>
                         <span class="align-middle">Products</span>
                     </a>
 
-                    <ul id="inventory" class="sidebar-dropdown list-unstyled collapse ms-3">
+                    <ul id="products" class="sidebar-dropdown list-unstyled collapse ms-3">
                         <li class="sidebar-item">
                             <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/add-product') ?>">
                                 <i class="align-middle" data-feather="minus"></i>
@@ -92,6 +92,14 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+
+                <!-- Home Page -->
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?= base_url('/') ?>">
+                        <i class="align-middle" data-feather="home"></i>
+                        <span class="align-middle">Home Page</span>
+                    </a>
                 </li>
             </ul>
         </div>

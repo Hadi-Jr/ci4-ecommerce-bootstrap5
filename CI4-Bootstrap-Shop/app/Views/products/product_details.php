@@ -168,18 +168,32 @@
                         </button>
                     </div>
 
-
                     <?php
                         $in_stock = true;
                         if ($product->stock_quantity == 0) {
                             $in_stock = false;
                         }
+
+                        if ($user_data?->role === 'admin') {
+                            ?>
+                            <a href="<?= base_url('/edit-product-view/') . $product->id ?>"
+                               class="btn btn-outline-secondary fw-bold">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                Edit Product
+                            </a>
+                        <?php
+                        } else {
+                            ?>
+                            <button class="btn green-btn fw-bold add-to-cart-btn pro-det-adc-btn
+                                <?= !$in_stock ? 'disabled' : '' ?>">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <span class="ms-1">
+                                    <?= !$in_stock ? 'Out Of Stock' : 'Add to Cart' ?>
+                                </span>
+                            </button>
+                        <?php
+                        }
                     ?>
-                    <button class="btn green-btn fw-bold add-to-cart-btn pro-det-adc-btn
-                            <?= !$in_stock ? 'disabled' : '' ?>">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <?= !$in_stock ? 'Out Of Stock' : 'Add to Cart' ?>
-                    </button>
                 </div>
             </div>
         </div>
@@ -306,25 +320,44 @@ if (!empty($related_products)) {
                                         ?>
                                     </div>
                                     <?php
-                                    $in_stock = true;
-                                    if ($related_product->stock_quantity == 0) {
-                                        $in_stock = false;
-                                    }
-                                    ?>
-                                    <div class="p-2 mt-auto">
-                                        <button data-product-id="<?= $related_product->id ?>"
-                                                class="d-none d-sm-block btn w-100 fw-bold green-btn
+                                    if ($user_data?->role === 'admin'){
+                                        ?>
+                                        <div class="p-2 mt-auto">
+                                            <a  href="<?= base_url('/edit-product-view/') . $related_product->id ?>"
+                                                class="d-none d-sm-block
+                                            btn w-100 fw-bold btn-outline-secondary">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                Edit Product
+                                            </a>
+                                            <a href="<?= base_url('/edit-product-view/') . $related_product->id ?>"
+                                               class="d-sm-none btn w-100 swiper-icon-btn btn-outline-secondary">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                        </div>
+                                        <?php
+                                    } else {
+                                        $in_stock = true;
+                                        if ($related_product->stock_quantity == 0) {
+                                            $in_stock = false;
+                                        }
+                                        ?>
+                                        <div class="p-2 mt-auto">
+                                            <button data-product-id="<?= $related_product->id ?>"
+                                                    class="d-none d-sm-block btn w-100 fw-bold green-btn
                                             add-to-cart-btn rel-products-atc-button
                                             <?= !$in_stock ? 'disabled' : '' ?>">
-                                            <i class="fa-solid fa-bag-shopping me-1"></i>
-                                            <?= !$in_stock ? 'Out Of Stock' : 'Add to Cart' ?>
-                                        </button>
-                                        <button data-product-id="<?= $related_product->id ?>"
-                                                class="d-sm-none btn w-100 swiper-icon-btn green-btn add-to-cart-btn
+                                                <i class="fa-solid fa-bag-shopping me-1"></i>
+                                                <?= !$in_stock ? 'Out Of Stock' : 'Add to Cart' ?>
+                                            </button>
+                                            <button data-product-id="<?= $related_product->id ?>"
+                                                    class="d-sm-none btn w-100 swiper-icon-btn green-btn add-to-cart-btn
                                             rel-products-atc-button">
-                                            <i class="fa-solid fa-bag-shopping"></i>
-                                        </button>
-                                    </div>
+                                                <i class="fa-solid fa-bag-shopping"></i>
+                                            </button>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                             </div>
                             <?php

@@ -46,10 +46,17 @@
                 }
                 ?>
 
-                <a class="btn green-btn rounded p-2 position-relative header-icons"
-                   aria-label="Cart"
-                   href="<?= base_url('/my-cart') ?>">
-                    <i class="fa-solid fa-bag-shopping"></i>
+                <a href="<?= base_url('/dashboard') ?>"
+                   class="btn btn-outline-secondary rounded p-2 header-icons
+                    <?= $user_data?->role !== 'admin' ? 'd-none' : '' ?>" aria-label="Account">
+                    <i class="fa-solid fa-sliders"></i>
+                </a>
+
+                <a class="btn green-btn rounded p-2 position-relative header-icons
+                    <?= $user_data?->role === 'admin' ? 'd-none' : '' ?>"
+                       aria-label="Cart"
+                       href="<?= base_url('/my-cart') ?>">
+                        <i class="fa-solid fa-bag-shopping"></i>
                     <span class="items-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                           style="font-size: 10px;">
                         <?= $cart_items_count ?>
@@ -76,16 +83,10 @@
                     </li>
 
                     <li class="d-lg-none p-0">
-                        <ul class="list-unstyled list-group mt-3">
-                            <li class="border-0 list-group-item list-item-clickable">
-                                <a class="d-flex align-items-center gap-2 mt-2" href="<?= base_url('/favorites') ?>">
-                                    <i class="fa-solid fa-bookmark" style="color: rgb(28, 208, 199);"></i>
-                                    My Favorites
-                                </a>
-                            </li>
 
-                            <li class="border-0 list-group-item list-item-clickable">
-                                <a class="d-flex align-items-center gap-2" href="<?= base_url('/my-orders') ?>">
+                        <ul class="list-unstyled list-group mt-3">
+                            <li class="border-0 list-group-item list-item-clickable <?= $user_data?->role === 'admin' ? 'd-none' : '' ?>">
+                                <a class="d-flex align-items-center gap-2 mt-2" href="<?= base_url('/my-orders') ?>">
                                     <i class="fa-solid fa-box" style="color: rgb(28, 208, 199);"></i>
                                     Orders
                                 </a>
@@ -95,6 +96,13 @@
                                 <a class="d-flex align-items-center gap-2" href="<?= base_url('/promotions') ?>">
                                     <i class="fa-solid fa-tag" style="color: rgb(28, 208, 199);"></i>
                                     Promotions
+                                </a>
+                            </li>
+
+                            <li class="border-0 list-group-item list-item-clickable <?= $user_data?->role === 'admin' ? 'd-none' : '' ?>">
+                                <a class="d-flex align-items-center gap-2" href="<?= base_url('/favorites') ?>">
+                                    <i class="fa-solid fa-bookmark" style="color: rgb(28, 208, 199);"></i>
+                                    My Favorites
                                 </a>
                             </li>
 
@@ -124,33 +132,42 @@
 
             <div class="d-none d-lg-flex align-items-center gap-2 me-lg-5">
 
-                <a href="<?= base_url('/favorites') ?>" class="btn btn-outline-secondary rounded p-2 header-icons"
+                <a href="<?= base_url('/favorites') ?>"
+                   class="btn btn-outline-secondary rounded p-2 header-icons <?= $user_data?->role === 'admin' ? 'd-none' : '' ?>"
                    aria-label="Orders" title="My Favorites">
                     <i class="fa-solid fa-bookmark"></i>
                 </a>
 
-                <a href="<?= base_url('/my-orders') ?>" class="btn btn-outline-secondary rounded p-2 header-icons" aria-label="Orders" title="My Orders">
+                <a href="<?= base_url('/my-orders') ?>"
+                   class="btn btn-outline-secondary rounded p-2 header-icons <?= $user_data?->role === 'admin' ? 'd-none' : '' ?>"
+                   aria-label="Orders" title="My Orders">
                     <i class="fa-solid fa-box"></i>
                 </a>
                 <?php
-                if (session()->get('user_data') !== null) {
-                    ?>
-                    <a href="<?= base_url('/logout') ?>" class="btn btn-outline-secondary rounded p-2 header-icons"
-                       aria-label="Account" title="Logout">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                    </a>
-                <?php
-                } else {
-                    ?>
-                    <a href="<?= base_url('/login') ?>" class="btn btn-outline-secondary rounded p-2 header-icons"
-                       aria-label="Account" title="Login">
-                        <i class="fa-solid fa-user"></i>
-                    </a>
-                <?php
-                }
+                    if (session()->get('user_data') !== null) {
+                        ?>
+                        <a href="<?= base_url('/logout') ?>" class="btn btn-outline-secondary rounded p-2 header-icons"
+                           aria-label="Account" title="Logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+                    <?php
+                    } else {
+                        ?>
+                        <a href="<?= base_url('/login') ?>" class="btn btn-outline-secondary rounded p-2 header-icons"
+                           aria-label="Account" title="Login">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    <?php
+                    }
                 ?>
+                <a href="<?= base_url('/dashboard') ?>"
+                   class="btn btn-outline-secondary rounded p-2 header-icons
+                   <?= $user_data?->role !== 'admin' ? 'd-none' : '' ?>"
+                   aria-label="Account" title="Login">
+                    <i class="fa-solid fa-sliders"></i>
+                </a>
 
-                <a class="btn green-btn rounded p-2 position-relative header-icons"
+                <a class="btn green-btn rounded p-2 position-relative header-icons <?= $user_data?->role === 'admin' ? 'd-none' : '' ?>"
                    aria-label="Cart"
                    title="My Cart"
                    href="<?= base_url('/my-cart') ?>">

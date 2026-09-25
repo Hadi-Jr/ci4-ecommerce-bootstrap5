@@ -52,7 +52,7 @@ class CategoryModel
 
         $builder = $this->db
             ->table('products p')
-            ->select('p.id, p.name, p.price, p.promo, p.slug, i.image_url')
+            ->select('p.id, p.name, p.price, p.promo, p.slug, i.image_url, p.stock_quantity')
             ->join('categories c', 'c.id = p.category_id')
             ->join('images i', 'i.product_id = p.id')
             ->where('c.slug', $slug)
