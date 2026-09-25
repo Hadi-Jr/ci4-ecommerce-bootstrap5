@@ -18,7 +18,9 @@ class AdminOrderModel extends BaseController
     public function get_order_financials()
     {
         return $this->db->table('orders')
-            ->select('avg(total_amount) as avg_order_value, sum(total_amount) as earnings')
+            ->select('avg(total_amount) as avg_order_value, 
+                            sum(total_amount) as earnings,
+                            count(id) as total_orders')
             ->where('status', 'delivered')
             ->get()
             ->getRow();

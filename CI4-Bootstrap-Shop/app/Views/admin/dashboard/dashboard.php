@@ -14,14 +14,14 @@
 
                                 <div class="col-auto" >
                                     <div class="stat text-primary" >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck align-middle"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                                        <i class="fa-solid fa-gauge" style="font-size: 20px"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="h1 mt-1 mb-3" >$<?= number_format($avg_order_value, 2) ?></div>
-                            <div class="mb-0" >
-                                <span class="text-danger"></span>
-                                <span class="text-muted"></span>
+                            <div class="mb-0">
+                                <span class="text-success"><?=$total_orders?></span>
+                                <span class="text-muted">total orders</span>
                             </div>
                         </div>
                     </div>
@@ -34,14 +34,14 @@
 
                                 <div class="col-auto" >
                                     <div class="stat text-primary" >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users align-middle"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                    </div>
+                                        <i class="fa-solid fa-cart-shopping" style="font-size: 17px"></i>                                    </div>
                                 </div>
                             </div>
                             <div class="h1 mt-1 mb-3" ><?= $products_sold ?></div>
                             <div class="mb-0" >
-                                <span class="text-danger"></span>
-                                <span class="text-muted"></span>
+                                <div class="mb-0">
+                                    <span class="text-muted">Customer purchases</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,14 +56,13 @@
 
                                 <div class="col-auto" >
                                     <div class="stat text-primary" >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign align-middle"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                                    </div>
+                                        <i class="fa-solid fa-dollar-sign" style="font-size: 20px"></i>                                    </div>
                                 </div>
                             </div>
                             <div class="h1 mt-1 mb-3" >$<?=$earnings ?></div>
-                            <div class="mb-0" >
-                                <span class="text-success"></span>
-                                <span class="text-muted"></span>
+                            <div class="mb-0">
+                                <span class="text-success">Current earnings</span>
+                                <span class="text-muted">from all orders</span>
                             </div>
                         </div>
                     </div>
@@ -76,14 +75,13 @@
 
                                 <div class="col-auto" >
                                     <div class="stat text-primary" >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart align-middle"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                        <i class="fa-solid fa-user" style="font-size: 18px"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="h1 mt-1 mb-3" ><?= $customers ?></div>
-                            <div class="mb-0" >
-                                <span class="text-danger"></span>
-                                <span class="text-muted"></span>
+                            <div class="mb-0">
+                                <span class="text-muted">Registered customers</span>
                             </div>
                         </div>
                     </div>
@@ -97,15 +95,14 @@
                                 </div>
 
                                 <div class="col-auto" >
-                                    <div class="stat text-primary" >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign align-middle"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                    <div class="stat text-primary">
+                                        <i class="fa-solid fa-ban" style="font-size: 20px"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="h1 mt-1 mb-3" ><?= $canceled_orders ?></div>
                             <div class="mb-0" >
-                                <span class="text-success"></span>
-                                <span class="text-muted"></span>
+                                <span class="text-muted">Overall</span>
                             </div>
                         </div>
                     </div>
@@ -120,14 +117,12 @@
 
                                 <div class="col-auto" >
                                     <div class="stat text-primary" >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart align-middle"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                                    </div>
+                                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 18px"></i>                                    </div>
                                 </div>
                             </div>
                             <div class="h1 mt-1 mb-3" ><?= $low_stock_products_count ?></div>
-                            <div class="mb-0" >
-                                <span class="text-danger"></span>
-                                <span class="text-muted"></span>
+                            <div class="mb-0">
+                                <span class="text-muted">Below threshold of 50 units</span>
                             </div>
                         </div>
                     </div>
