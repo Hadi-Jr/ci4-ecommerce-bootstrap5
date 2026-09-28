@@ -15,7 +15,7 @@
                 <div class="col-12">
                     <form id="login_form">
                         <div class="mb-3">
-                            <label for="email_username" class="fw-bold p-1">Username or Email</label>
+                            <label for="email_username" class="fw-bold p-1">Email</label>
                             <input type="text" class="form-control" id="email_username"
                                    placeholder="Enter username or email" name="email_username" required>
                             <div class="invalid-feedback"></div>

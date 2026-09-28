@@ -115,7 +115,7 @@ class UserController extends BaseController
 
             $rules = [
                 'email_username' => [
-                    'rules' => 'required|min_length[6]|valid_email|max_length[100]',
+                    'rules' => 'required|min_length[4]|valid_email|max_length[100]',
                     'errors' => [
                         'required' => lang('Errors.email_required'),
                         'min_length' => lang('Errors.email_min_length')
