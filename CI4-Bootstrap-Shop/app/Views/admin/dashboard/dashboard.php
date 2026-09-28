@@ -37,7 +37,7 @@
                                         <i class="fa-solid fa-cart-shopping" style="font-size: 17px"></i>                                    </div>
                                 </div>
                             </div>
-                            <div class="h1 mt-1 mb-3" ><?= $products_sold ?></div>
+                            <div class="h1 mt-1 mb-3" ><?= $products_sold ?? 0 ?></div>
                             <div class="mb-0" >
                                 <div class="mb-0">
                                     <span class="text-muted">Customer purchases</span>
@@ -59,7 +59,7 @@
                                         <i class="fa-solid fa-dollar-sign" style="font-size: 20px"></i>                                    </div>
                                 </div>
                             </div>
-                            <div class="h1 mt-1 mb-3" >$<?=$earnings ?></div>
+                            <div class="h1 mt-1 mb-3" >$<?= $earnings ?? 0 ?></div>
                             <div class="mb-0">
                                 <span class="text-muted">From completed orders</span>
                             </div>
@@ -139,7 +139,7 @@
                                         <i class="fa-solid fa-user-tag" style="font-size: 17px"></i>                                   </div>
                                 </div>
                             </div>
-                            <div class="h1 mt-1 mb-3" >$<?= $earnings / $customers ?></div>
+                            <div class="h1 mt-1 mb-3" >$<?= $earnings / ($customers === 0 ? 1 : $customers) ?></div>
                             <div class="mb-0">
                                 <span class="text-muted">Avg earnings per customer</span>
                             </div>
@@ -148,14 +148,14 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="card table-responsive">
-                        <div class="card-body" >
-                            <div class="row" >
+                        <div class="card-body">
+                            <div class="row">
                                 <div class="col mt-0" >
                                     <h5 class="card-title">Total Orders</h5>
                                 </div>
 
-                                <div class="col-auto" >
-                                    <div class="stat text-primary" >
+                                <div class="col-auto">
+                                    <div class="stat text-primary">
                                         <i class="fa-solid fa-chart-line" style="font-size: 18px"></i>
                                     </div>
                                 </div>
@@ -189,28 +189,35 @@
                 </thead>
                 <tbody>
                 <?php
-                foreach ($trending_products as $trending_product) {
+                if (empty($trending_products)) {
                     ?>
                     <tr>
-                        <td>
-                            <button data-id="<?= $trending_product->id ?>" class="btn btn-primary btn-sm view-product-btn">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </td>
-                        <td>
-                            <div class="line-clamp-2">
-                                <?= $trending_product->name ?>
-                            </div>
-                        </td>
-                        <td><?= $trending_product->sku ?></td>
-                        <td><?= $trending_product->total_units_sold ?></td>
-                        <td>$<?= $trending_product->total_sales ?></td>
-                        <td><?= $trending_product->stock_quantity ?></td>
+                        <td colspan="6">No trending products are currently available.</td>
                     </tr>
-                    <?php
+                <?php
+                } else {
+                    foreach ($trending_products as $trending_product) {
+                        ?>
+                        <tr>
+                            <td>
+                                <button data-id="<?= $trending_product->id ?>" class="btn btn-primary btn-sm view-product-btn">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <div class="line-clamp-2">
+                                    <?= $trending_product->name ?>
+                                </div>
+                            </td>
+                            <td><?= $trending_product->sku ?></td>
+                            <td><?= $trending_product->total_units_sold ?></td>
+                            <td>$<?= $trending_product->total_sales ?></td>
+                            <td><?= $trending_product->stock_quantity ?></td>
+                        </tr>
+                        <?php
+                    }
                 }
                 ?>
-
                 </tbody>
             </table>
         </div>
@@ -238,7 +245,7 @@
                     if (empty($low_stock_products)) {
                         ?>
                             <tr>
-                                <td colspan="3">No products are currently low in stock.</td>
+                                <td colspan="5">No products are currently low in stock.</td>
                             </tr>
                     <?php
                     } else {
@@ -279,31 +286,40 @@
                 </tr>
                 </thead>
                 <tbody>
+
                 <?php
-                foreach ($recent_orders as $recent_order) {
+                if (empty($recent_orders)) {
                     ?>
                     <tr>
-                        <td>
-                            <button data-id="<?= $recent_order->id ?>" class="btn btn-primary btn-sm view-order-btn">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </td>
-                        <td><?= $recent_order->email_address ?></td>
-                        <td>$<?= $recent_order->total_amount ?></td>
-                        <td>
-                            <?php
+                        <td colspan="5">No recent orders found.</td>
+                    </tr>
+                <?php
+                } else {
+                    foreach ($recent_orders as $recent_order) {
+                        ?>
+                        <tr>
+                            <td>
+                                <button data-id="<?= $recent_order->id ?>" class="btn btn-primary btn-sm view-order-btn">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                            <td><?= $recent_order->email_address ?></td>
+                            <td>$<?= $recent_order->total_amount ?></td>
+                            <td>
+                                <?php
                                 $cls_status = 'success';
                                 if ($recent_order->status === 'cancelled') {
                                     $cls_status = 'danger';
                                 } else if ($recent_order->status === 'pending') {
                                     $cls_status = 'warning';
                                 }
-                            ?>
-                            <span class="badge bg-<?= $cls_status ?>"><?= $recent_order->status ?></span>
-                        </td>
-                        <td><?= $recent_order->order_date ?></td>
-                    </tr>
-                <?php
+                                ?>
+                                <span class="badge bg-<?= $cls_status ?>"><?= $recent_order->status ?></span>
+                            </td>
+                            <td><?= $recent_order->order_date ?></td>
+                        </tr>
+                        <?php
+                    }
                 }
                 ?>
                 </tbody>
