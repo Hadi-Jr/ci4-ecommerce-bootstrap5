@@ -36,7 +36,7 @@ class AdminOrderModel extends BaseController
     public function recent_orders()
     {
         return $this->db->table('orders')
-            ->orderBy('order_date')
+            ->orderBy('order_date', 'DESC')
             ->limit(10)
             ->get()
             ->getResult();

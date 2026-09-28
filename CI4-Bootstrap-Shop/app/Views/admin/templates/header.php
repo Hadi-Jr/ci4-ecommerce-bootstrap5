@@ -1,7 +1,7 @@
 <div class="wrapper">
     <nav id="sidebar" class="sidebar js-sidebar">
         <div class="sidebar-content js-simplebar">
-            <a class="sidebar-brand mt-1" href="<?= base_url('/admin-home-page') ?>">
+            <a class="sidebar-brand mt-1" href="<?= base_url('/dashboard') ?>">
                 <img style="width: 30px" src="<?= base_url('admin-assets/src/img/icons/icon-48x48.png') ?>">
                 <span class="align-middle small ms-2">Inventory Management</span>
             </a>
