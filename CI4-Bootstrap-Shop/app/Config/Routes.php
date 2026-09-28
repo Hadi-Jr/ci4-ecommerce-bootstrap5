@@ -58,7 +58,7 @@ $routes->add('/edit-specs', 'Admin\AdminProductController::edit_specs', ['filter
 $routes->add('/edit-attributes', 'Admin\AdminProductController::edit_attributes', ['filter' => 'admin']);
 $routes->add('/edit-combinations', 'Admin\AdminProductController::edit_combinations', ['filter' => 'admin']);
 $routes->add('/admin/product_details/(:any)', 'Admin\AdminProductController::product_details/$1', ['filter' => 'admin']);
-
+$routes->add('/add-attributes', 'Admin\AdminProductController::add_attributes', ['filter' => 'admin']);
 
 // Categories
 $routes->add('/categories', 'Admin\AdminCategoryController::view', ['filter' => 'admin']);

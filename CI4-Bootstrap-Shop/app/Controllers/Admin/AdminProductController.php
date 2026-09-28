@@ -592,6 +592,61 @@ class AdminProductController extends BaseController
         ]);
     }
 
+    public function add_attributes()
+    {
+        if ($this->request->getMethod() === 'POST') {
+            $rules = [
+                'attribute_name' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Please choose an attribute name',
+                    ]
+                ],
+                'attribute_value' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Please choose an attribute value',
+                    ]
+                ],
+            ];
+
+            if (!$this->validate($rules)) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'errors' => $this->validator->getErrors()
+                ]);
+            }
+
+            $post_data = $this->request->getPost();
+
+            $attr = $this->admin_product_model->add_or_edit_attributes($post_data['attribute_name'],
+                $post_data['attribute_value']);
+            if (!$attr) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'errors' => [
+                        'general-error' => 'Something went wrong, please try again later'
+                    ]
+                ]);
+            }
+
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Attribute saved successfully'
+            ]);
+        }
+
+        $attribute_names = $this->admin_product_model->get_attributes_names();
+        $this->data+= [
+            'attribute_names' => $attribute_names
+        ];
+
+        return view('admin/templates/meta', $this->data)
+            . view('admin/templates/header', $this->data)
+            . view('admin/products/add_attributes', $this->data)
+            . view('admin/templates/footer', $this->data);
+    }
+
     public function product_details($product_id)
     {
         $product_details = $this->admin_product_model->get_product_details($product_id);

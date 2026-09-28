@@ -51,6 +51,22 @@
                     </ul>
                 </li>
 
+                <!--  Attributes   -->
+                <li class="sidebar-item parent">
+                    <a data-bs-target="#attributes" data-bs-toggle="collapse" class="sidebar-link collapsed" href="#">
+                        <i class="align-middle" data-feather="tag"></i>
+                        <span class="align-middle">Attributes</span>
+                    </a>
+
+                    <ul id="attributes" class="sidebar-dropdown list-unstyled collapse ms-3">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link d-flex align-items-center" href="<?= base_url('/add-attributes') ?>">
+                                <i class="align-middle" data-feather="minus"></i>
+                                <span>Add Attributes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
                 <!-- Products -->
                 <li class="sidebar-item parent">
@@ -121,11 +137,10 @@
                         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
                             <img src="<?= base_url('admin-assets/src/img/icons/user-icon.png') ?>" class="avatar img-fluid rounded me-1" />
                             <span class="text-dark">
-                                <?= $user_data->full_name?>
+                                <?= ucwords($user_data->full_name)?>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
                             <a class="dropdown-item" href="<?= base_url('/logout') ?>">Log out</a>
                         </div>
                     </li>

@@ -820,4 +820,38 @@ class AdminProductModel
         ];
     }
 
+    public function add_or_edit_attributes($attribute_name, $attribute_value)
+    {
+        $this->db->transStart();
+        $existing_attr_name = $this->db->table('attributes')
+            ->where('name', ucwords($attribute_name))
+            ->get()
+            ->getRow();
+
+        if ($existing_attr_name) {
+            $this->db->table('attribute_value')
+                ->insert([
+                    'attribute_id' => $existing_attr_name->id,
+                    'value'        => $attribute_value
+                ]);
+        } else {
+            $this->db->table('attributes')
+                ->insert([
+                    'name' => $attribute_name,
+                    'type' => 'dropdown'
+                ]);
+
+            $new_att_id = $this->db->insertID();
+
+            $this->db->table('attribute_value')
+                ->insert([
+                    'attribute_id' => $new_att_id,
+                    'value'        => $attribute_value
+                ]);
+        }
+
+        $this->db->transComplete();
+        return $this->db->transStatus();
+    }
+
 }
