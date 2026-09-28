@@ -48,10 +48,10 @@ class UserController extends BaseController
                     ]
                 ],
                 'full_name' => [
-                    'rules' => 'required|min_length[6]|max_length[100]',
+                    'rules' => 'required|min_length[4]|max_length[100]',
                     'errors' => [
                         'required' => lang('Errors.full_name_required'),
-                        'min_length' => lang('Errors.full_name_min_length')
+                        'min_length' => 'Password must be at least 6 characters.'
                     ]
                 ],
                 'username' => [
@@ -65,7 +65,7 @@ class UserController extends BaseController
                     'rules' => 'required|min_length[6]|max_length[100]|matches[password]',
                     'errors' => [
                         'required' => lang('Errors.confirm_password_required'),
-                        'min_length' => lang('Errors.min_length'),
+                        'min_length' => 'Password must be at least 6 characters.',
                         'max_length' => lang('Errors.max_length'),
                         'matches' => lang('Errors.confirm_password')
                     ]
