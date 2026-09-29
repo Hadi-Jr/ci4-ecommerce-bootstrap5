@@ -101,19 +101,19 @@
                                     ?>
                                     <button data-product-id="<?= $promo_product->id ?>" class="d-none d-sm-block
                                             btn w-100 fw-bold green-btn
-                                            trending-products-atc-button add-to-cart-btn
+                                            trending-products-atc-button
                                             <?= !$in_stock ? 'disabled' : '' ?>">
                                         <i class="fa-solid fa-bag-shopping me-1"></i>
                                         <?= !$in_stock ? 'Out Of Stock' : 'Add to Cart' ?>
                                     </button>
                                     <button data-product-id="<?= $promo_product->id ?>"
-                                            class="d-sm-none btn w-100 swiper-icon-btn trending-products-atc-button">
+                                            class="d-sm-none btn green-btn w-100 swiper-icon-btn
+                                            trending-products-atc-button">
                                         <i class="fa-solid fa-bag-shopping"></i>
                                     </button>
                                     <?php
                                 }
                                 ?>
-
                             </div>
                         </div>
                     </div>
@@ -232,4 +232,52 @@
         });
     }
 
+</script>
+
+<script>
+    $(document).on("click", ".trending-products-atc-button", function () {
+        let product_id = $(this).data('product-id');
+
+        $.ajax({
+            url: '<?= base_url('/add-to-cart') ?>',
+            data: {
+                product_id: product_id,
+                quick_add: true
+            },
+            method: 'post',
+            dataType: 'json'
+        }).done(function (response) {
+            if (response.status === 'success') {
+                Swal.fire({
+                    icon: "success",
+                    title: "Added to cart!",
+                    text: response.message,
+                    toast: true,
+                    position: "bottom-left",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: "#fff",
+                    color: "#333",
+                });
+
+                $('.items-count').html(response.items_count);
+            }
+
+            if (response.status === 'error') {
+                Swal.fire({
+                    icon: "error",
+                    title: "Failed",
+                    text: response.message,
+                    toast: true,
+                    position: "bottom-left",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: "#fff",
+                    color: "#333",
+                });
+            }
+        });
+    });
 </script>

@@ -66,13 +66,13 @@ if (empty($category_products)) {
                         ?>
                         <button data-product-id="<?= $category_product->id ?>" class="d-none d-sm-block
                                             btn w-100 fw-bold green-btn
-                                            trending-products-atc-button add-to-cart-btn
+                                            cat-products-atc-btn add-to-cart-btn
                                             <?= !$in_stock ? 'disabled' : '' ?>">
                             <i class="fa-solid fa-bag-shopping me-1"></i>
                             <?= !$in_stock ? 'Out Of Stock' : 'Add to Cart' ?>
                         </button>
                         <button data-product-id="<?= $category_product->id ?>"
-                                class="d-sm-none btn w-100 swiper-icon-btn trending-products-atc-button">
+                                class="d-sm-none btn w-100 swiper-icon-btn cat-products-atc-btn">
                             <i class="fa-solid fa-bag-shopping"></i>
                         </button>
                         <?php
