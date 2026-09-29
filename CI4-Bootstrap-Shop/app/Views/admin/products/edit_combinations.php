@@ -284,6 +284,7 @@
             }
         }).done(function (response) {
             $('.combNameContainer').html(response);
+            calculateCombinations();
         });
     });
 </script>
