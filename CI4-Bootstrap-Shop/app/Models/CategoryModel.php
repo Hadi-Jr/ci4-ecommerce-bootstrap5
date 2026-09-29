@@ -166,7 +166,6 @@ class CategoryModel
                             count(p.id) as product_count,
                             sum(p.total_units_sold) as total_units_sold')
             ->join('products p', 'p.category_id = c.id', 'left')
-            ->where('c.parent_id is not null')
             ->where('is_active', 1)
             ->groupBy('c.id')
             ->having('total_units_sold >=', 0) // temporary 0 for testing purposes

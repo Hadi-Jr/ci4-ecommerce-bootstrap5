@@ -215,7 +215,7 @@
             </div>
         </div>
 
-        <div class="row mt-5 p-1">
+        <div class="row mt-5 p-1 mb-5">
             <div class="overflow-auto">
                 <ul class="nav nav-tabs flex-nowrap" id="productTabs" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -380,7 +380,7 @@ if (!empty($related_products)) {
 
 
 <div class="row mt-5">
-    <div class="col-12 text-center mb-4">
+    <div class="col-12 text-center mb-2">
         <h4 class="fw-bold">Reviews (<?= $reviews['reviews_count'] ?>)</h4>
         <p>
             <?= $reviews['reviews_count'] == 0 ? 'No reviews yet. Be the first to share your experience.' : '' ?>
@@ -414,7 +414,7 @@ if (!empty($related_products)) {
     }
     ?>
 
-    <div class="col-12 mt-4" id="reviews">
+    <div class="col-12 mt-3" id="reviews">
         <h5 class="fw-bold">Your Rating</h5>
 
         <div id="main-product-rater"></div>
