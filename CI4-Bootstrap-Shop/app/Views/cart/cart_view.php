@@ -9,6 +9,7 @@
         <!-- MOBILE LAYOUT  -->
         <div class="cart-products-sm d-md-none">
             <?php
+            $saved = 0.0;
             foreach ($cart_items as $cart_item) {
                 ?>
                 <div class="row mt-4 cart_item">
@@ -37,6 +38,8 @@
                                 <p class="cart-price-sm">
                                     <?php
                                     if ($cart_item->promo > 0 && $cart_item->comb_promo > 0) {
+                                        $saved += ($cart_item->comb_price ?? $cart_item->price)
+                                                - ($cart_item->comb_promo ?? $cart_item->promo)
                                         ?>
                                         <span class="old-price">
                                         <?= $cart_item->comb_price ?: $cart_item->price ?> €</span>
@@ -179,7 +182,7 @@
                     <div class="col-12 cart-summary-list-sm cart-summary-list-md">
                         <div class="row">
                             <div class="col-9">You saved:</div>
-                            <div class="col-3 text-end">0.00 €</div>
+                            <div class="col-3 text-end"><?= number_format($saved, 2) ?> €</div>
                         </div>
                     </div>
                     <div class="col-12 cart-summary-list-sm cart-summary-list-md">
@@ -223,7 +226,7 @@
                             <div class="col-12 cart-summary-list-lg">
                                 <div class="row">
                                     <div class="col-9">You saved:</div>
-                                    <div class="col-3 text-end">0.00 €</div>
+                                    <div class="col-3 text-end"><?= number_format($saved, 2) ?> €</div>
                                 </div>
                             </div>
                             <div class="col-12 cart-summary-list-lg">

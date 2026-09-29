@@ -305,7 +305,7 @@ class ProductModel
     {
         $builder = $this->db
             ->table('products p')
-            ->select('p.id, p.name, p.price, p.promo, p.slug, i.image_url')
+            ->select('p.id, p.name, p.price, p.promo, p.slug, i.image_url, p.stock_quantity')
             ->join('images i', 'i.product_id = p.id')
             ->where('p.promo >', 0)
             ->where('p.status', 1)
